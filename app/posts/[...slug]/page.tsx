@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { allPosts } from "contentlayer/generated";
+import "highlight.js/styles/atom-one-dark.css";
 
 import { Metadata } from "next";
 import { Mdx } from "@/components/mdx-components";

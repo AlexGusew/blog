@@ -1,4 +1,6 @@
-import { defineDocumentType, makeSource } from "contentlayer/source-files"
+import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import highlight from "rehype-highlight";
+import rehypeMdxCodeProps from "rehype-mdx-code-props";
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
@@ -10,7 +12,7 @@ const computedFields = {
     type: "string",
     resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
   },
-}
+};
 
 export const Page = defineDocumentType(() => ({
   name: "Page",
@@ -26,7 +28,7 @@ export const Page = defineDocumentType(() => ({
     },
   },
   computedFields,
-}))
+}));
 
 export const Post = defineDocumentType(() => ({
   name: "Post",
@@ -46,9 +48,10 @@ export const Post = defineDocumentType(() => ({
     },
   },
   computedFields,
-}))
+}));
 
 export default makeSource({
   contentDirPath: "./content",
+  mdx: { rehypePlugins: [highlight, rehypeMdxCodeProps] },
   documentTypes: [Post, Page],
-})
+});
