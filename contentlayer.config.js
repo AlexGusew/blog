@@ -46,6 +46,9 @@ export const Post = defineDocumentType(() => ({
       type: "date",
       required: true,
     },
+    difficulty: {
+      type: "number",
+    },
   },
   computedFields,
 }));

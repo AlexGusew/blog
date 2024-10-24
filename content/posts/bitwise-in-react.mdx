@@ -1,12 +1,9 @@
 ---
-title: Exploring bitwise operations in ReactJS
-description: How ReactJS uses binary masks under the hood.
+title: Bitwise operations in ReactJS
+description: Exploring how ReactJS uses binary masks with binary operations under the hood.
 date: "2024-10-24"
+difficulty: 2
 ---
-
-```js filename="packages/react-reconciler/src/ReactFiberFlags.js"
-const copyToClipboard = async () => {};
-```
 
 <Image
   src="/bitwise-in-react/header.svg"
@@ -21,38 +18,48 @@ React's internal implementation makes extensive use of bitwise operations and bi
 
 React uses bitmasks extensively throughout its codebase, primarily because they enable fast and efficient checking of state inclusion and feature flags. Bitwise operations allow React to pack multiple boolean flags into a single integer, reducing memory usage and improving performance.
 
+## Disclaimer
+
+In this post I assume you're already familiar with bitwise operations, so I won't explain the basics.
+
+---
+
 ## Deep dive into `react-reconciler`
 
-### ReactFiberFlags
+### React Fiber flags
 
 The first notable example is the usage of bitmasks to define node types in React Fiber Tree. Within the Fiber implementation, node states like `Incomplete`, `NeedsPropagation`, and others are defined using bitmasks.
 
-Location: `packages/react-reconciler/src/ReactFiberFlags.js`
+```ts filename="packages/react-reconciler/src/ReactFiberFlags.js"
+export const Update = /*          */ 0b0000000000000000000000000100;
+export const Cloned = /*          */ 0b0000000000000000000000001000;
 
-<Image
-  src="/bitwise-in-react/image.png"
-  width="718"
-  height="404"
-  alt="React Fiber Flags Implementation"
-/>
+export const ChildDeletion = /*   */ 0b0000000000000000000000010000;
+export const ContentReset = /*    */ 0b0000000000000000000000100000;
+
+...
+
+export const Incomplete = /*      */ 0b0000000000001000000000000000;
+export const ShouldCapture = /*   */ 0b0000000000010000000000000000;
+export const DidPropagateContext =   0b0000000001000000000000000000;
+export const NeedsPropagation = /**/ 0b0000000010000000000000000000;
+
+
+export const BeforeMutationMask: number =
+  Update |
+  Snapshot |
+  (enableCreateEventHandleAPI ? ChildDeletion | Visibility : 0);
+```
 
 These flags are then used to determine whether a subtree needs rerendering. Here's a key example from the reconciliation process:
 
-```javascript
+```js filename="packages/react-reconciler/src/ReactFiberWorkLoop.js"
+...
 const rootHasEffect =
   (finishedWork.flags &
     (BeforeMutationMask | MutationMask | LayoutMask | PassiveMask)) !==
   NoFlags;
 ```
-
-Location: `packages/react-reconciler/src/ReactFiberWorkLoop.js`
-
-<Image
-  src="/bitwise-in-react/image-1.png"
-  width="718"
-  height="404"
-  alt="ReactFiberWorkLoop.js"
-/>
 
 Let's break down how this code works:
 
@@ -61,66 +68,86 @@ Let's break down how this code works:
 3. Finally, it checks if the result is not equal to `NoFlags` (which is zero or `0b0`)
 4. If the node flags have no common flags with our search masks, the check evaluates to `0 !== 0`, returning `false`
 
-### React Running Modes
+### React Execution Modes
 
-React also uses bitmasks to specify its running modes:
+React also uses bitmasks to specify its execution modes:
 
-<Image
-  src="/bitwise-in-react/image-2.png"
-  width="718"
-  height="404"
-  alt="React Running Modes"
-/>
+```ts filename="packages/react-reconciler/src/ReactTypeOfMode.js"
+export type TypeOfMode = number;
+
+export const NoMode = /*                         */ 0b0000000;
+export const ConcurrentMode = /*                 */ 0b0000001;
+export const ProfileMode = /*                    */ 0b0000010;
+export const DebugTracingMode = /*               */ 0b0000100;
+export const StrictLegacyMode = /*               */ 0b0001000;
+export const StrictEffectsMode = /*              */ 0b0010000;
+export const NoStrictPassiveEffectsMode = /*     */ 0b1000000;
+```
 
 React internally supports seven distinct modes:
 
-- NoMode
-- ConcurrentMode
-- ProfileMode
-- DebugTracingMode
-- StrictLegacyMode
-- StrictEffectsMode
-- NoStrictPassiveEffectsMode
+- **NoMode**: This mode signifies the default setting where no specific mode is applied to React operations.
+- **ConcurrentMode**: Enables concurrent features, allowing React to interrupt rendering work to prioritize more urgent tasks.
+- **ProfileMode**: Activates additional profiling and diagnostic information to help with performance optimization.
+- **DebugTracingMode**: Facilitates debugging by tracing component renders and their causes, useful for development environments.
+- **StrictLegacyMode**: Emulates certain behaviors from older versions of React, helping gradually adapt to newer changes.
+- **StrictEffectsMode**: Enhances effect handling for more predictable and safer side-effects in React components.
+- **NoStrictPassiveEffectsMode**: A specific mode that relaxes the rules around passive effects, offering compatibility or performance adjustments.
 
 To check if a fiber node is in debug mode, React performs a bitwise `AND` operation:
 
-```javascript
-sourceFiber.mode & DebugTracingMode;
+```js filename="packages/react-reconciler/src/ReactFiberThrow.js"
+if (__DEV__) {
+  if (enableDebugTracing) {
+    if (sourceFiber.mode & DebugTracingMode) {
+      const name = getComponentNameFromFiber(sourceFiber) || "Unknown";
+      logComponentSuspended(name, wakeable);
+    }
+  }
+}
 ```
-
-<Image
-  src="/bitwise-in-react/image-3.png"
-  width="718"
-  height="404"
-  alt="Debug Mode Check"
-/>
 
 One elegant aspect is how easily React combines fiber node modes using the bitwise `OR` operator:
 
-<Image
-  src="/bitwise-in-react/image-4.png"
-  width="718"
-  height="404"
-  alt="Combining Modes"
-/>
+```js filename="packages/react-reconciler/src/ReactFiber.js"
+case REACT_DEBUG_TRACING_MODE_TYPE:
+  if (enableDebugTracing) {
+    fiberTag = Mode;
+    mode |= DebugTracingMode;
+    break;
+  }
+```
 
 ### Event Types
 
 React's event system also leverages bitmasks for flag management:
+
+```ts filename="packages/react-dom-bindings/src/events/EventSystemFlags.js"
+export type EventSystemFlags = number;
+
+export const IS_EVENT_HANDLE_NON_MANAGED_NODE = 1;
+export const IS_NON_DELEGATED = 1 << 1;
+export const IS_CAPTURE_PHASE = 1 << 2;
+export const IS_PASSIVE = 1 << 3;
+export const IS_LEGACY_FB_SUPPORT_MODE = 1 << 4;
+
+export const SHOULD_NOT_DEFER_CLICK_FOR_FB_SUPPORT_MODE =
+  IS_LEGACY_FB_SUPPORT_MODE | IS_CAPTURE_PHASE;
+
+export const SHOULD_NOT_PROCESS_POLYFILL_EVENT_PLUGINS =
+  IS_EVENT_HANDLE_NON_MANAGED_NODE | IS_NON_DELEGATED | IS_CAPTURE_PHASE;
+```
 
 These flags are used in two primary ways:
 
 1. Adding modes using the `OR` operation
 2. Checking for specific modes using the `AND` operation:
 
-<Image
-  src="/bitwise-in-react/image-6.png"
-  width="718"
-  height="404"
-  alt="Event Type Usage"
-/>
+```js filename="packages/react-dom-bindings/src/events/DOMPluginEventSystem.js"
+const inCapturePhase = (eventSystemFlags & IS_CAPTURE_PHASE) !== 0;
+```
 
-Interesting observations:
+**Interesting observations:**
 
 - Event types use left shift notation (`1 << 2`) instead of explicit binary notation (`0b0000000100000000000000000000`)
 - The `IS_PASSIVE` event type exists in the codebase but is currently unused in the React monorepo
@@ -129,14 +156,23 @@ Interesting observations:
 
 Interestingly, React's scheduler priorities don't use bitmasks:
 
-<Image
-  src="/bitwise-in-react/image-7.png"
-  width="718"
-  height="404"
-  alt="Scheduler Priorities"
-/>
+```ts filename=""
+export type PriorityLevel = 0 | 1 | 2 | 3 | 4 | 5;
+
+// TODO: Use symbols?
+export const NoPriority = 0;
+export const ImmediatePriority = 1;
+export const UserBlockingPriority = 2;
+export const NormalPriority = 3;
+export const LowPriority = 4;
+export const IdlePriority = 5;
+```
 
 This design choice makes sense because priorities require comparison operations (greater than, less than) rather than set inclusion checks. While it would be possible to implement priorities using bitmasks, simple numeric values are more appropriate for this use case.
+
+I intentionally left TODO in the code. It's original TODO from React codebase. Apparently, they are thinking on changing proprieties to Symbol primitives, although plain integers seems elegant and convenient.
+
+---
 
 ## Summary
 

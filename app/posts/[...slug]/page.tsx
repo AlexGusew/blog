@@ -4,6 +4,7 @@ import "highlight.js/styles/atom-one-dark.css";
 
 import { Metadata } from "next";
 import { Mdx } from "@/components/mdx-components";
+import { Difficulty } from "@/components/ui/difficulty";
 
 interface PostProps {
   params: {
@@ -50,15 +51,26 @@ export default async function PostPage({ params }: PostProps) {
     notFound();
   }
 
+  const formattedDate = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(new Date(post.date));
+
   return (
     <article className="py-6 prose dark:prose-invert">
       <h1 className="mb-2">{post.title}</h1>
+      <div className="flex flex-row justify-between my-8">
+        {Boolean(post.difficulty) && (
+          <Difficulty value={post.difficulty as 1 | 2 | 3} />
+        )}
+        <span className="text-sm">Last updated {formattedDate}</span>
+      </div>
       {post.description && (
         <p className="text-xl mt-0 text-zinc-700 dark:text-zinc-200">
           {post.description}
         </p>
       )}
-      <hr className="my-4" />
       <Mdx code={post.body.code} />
     </article>
   );
