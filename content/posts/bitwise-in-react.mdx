@@ -17,7 +17,7 @@ React's internal implementation makes extensive use of bitwise operations and bi
 
 React uses bitmasks extensively throughout its codebase, primarily because they enable fast and efficient checking of state inclusion and feature flags. Bitwise operations allow React to pack multiple boolean flags into a single integer, reducing memory usage and improving performance.
 
-## Deep Dive into `react-reconciler`
+## Deep dive into `react-reconciler`
 
 ### ReactFiberFlags
 
@@ -52,7 +52,7 @@ Location: `packages/react-reconciler/src/ReactFiberWorkLoop.js`
 
 Let's break down how this code works:
 
-1. First, it combines multiple masks using the `OR` operator (`|`): `BeforeMutationMask | MutationMask | LayoutMask | PassiveMask`
+1. First, it combines multiple masks using the `OR`(`|`) operator: `BeforeMutationMask | MutationMask | LayoutMask | PassiveMask`
 2. Then, it performs a bitwise `AND` (`&`) between `finishedWork.flags` and the combined masks
 3. Finally, it checks if the result is not equal to `NoFlags` (which is zero or `0b0`)
 4. If the node flags have no common flags with our search masks, the check evaluates to `0 !== 0`, returning `false`

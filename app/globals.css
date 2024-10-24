@@ -5,3 +5,7 @@
 img {
   border-radius: 16px;
 }
+
+code {
+  @apply bg-gray-400 text-red-500 py-1 px-2 rounded-md font-mono text-sm bg-opacity-30;
+}
