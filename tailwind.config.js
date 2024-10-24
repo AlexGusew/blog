@@ -12,10 +12,10 @@ module.exports = {
         DEFAULT: {
           css: {
             "code::before": {
-              content: '"',
+              content: '""',
             },
             "code::after": {
-              content: '"',
+              content: '""',
             },
           },
         },
@@ -69,5 +69,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography"), require("tailwindcss-animate")],
+  plugins: [require("@tailwindcss/typography")],
 };
