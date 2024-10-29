@@ -74,3 +74,12 @@ code {
     @apply bg-background text-foreground;
   }
 }
+
+details > summary > * {
+  display: inline-block;
+  transform: translate(10px, 3px);
+}
+
+mjx-container > svg {
+  display: inline-block;
+}

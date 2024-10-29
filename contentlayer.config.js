@@ -1,6 +1,8 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import highlight from "rehype-highlight";
 import rehypeMdxCodeProps from "rehype-mdx-code-props";
+import mathjax from "rehype-mathjax";
+import remarkMath from "remark-math";
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
@@ -55,6 +57,9 @@ export const Post = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: "./content",
-  mdx: { rehypePlugins: [highlight, rehypeMdxCodeProps] },
+  mdx: {
+    rehypePlugins: [highlight, rehypeMdxCodeProps, mathjax],
+    remarkPlugins: [remarkMath],
+  },
   documentTypes: [Post, Page],
 });
