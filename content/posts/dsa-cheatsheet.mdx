@@ -1,6 +1,6 @@
 ---
-title: Algorithms cheat sheet
-description: A quick reference guide to some of the most commonly used algorithms
+title: Algorithms and Data Structures Cheatsheet
+description: A quick reference guide to some of the most commonly used algorithms in DSA
 date: "2024-10-28"
 ---
 
@@ -198,7 +198,9 @@ class Solution:
   }}
 />
 
-Maintain a dynamic window that slides through the array or string, adjusting its boundaries as needed to track relevant elements or characters.
+Maintain a **dynamic window** that slides through the array or string, adjusting its boundaries as needed to track relevant elements or characters.
+
+Convert **multiple nested loops into single loop**, reducing the time complexity from $O(n²)$ or $O(n³)$ to $O(n)$.
 
 #### Use cases
 
@@ -206,13 +208,31 @@ Maintain a dynamic window that slides through the array or string, adjusting its
 - Processing subsets of elements: The problem requires repeated computations on a **contiguous subset** of data elements (a subarray or a substring) of **fixed** or **variable** length
 - Find longest, shortest or target values of a sequence
 
+#### Problem patterns
+
+1. **Running Average**: Efficiently calculate the average of a fixed-size window in a data stream.
+1. **Formulating Adjacent Pairs**: Process adjacent pairs in an ordered structure for easy access and operation.
+1. **Target Value Identification**: Adjust window size to search efficiently for specific values or subarrays.
+1. **Longest/Shortest/Most Optimal Sequence**: Identify the desired sequence in a collection by sliding a window through it.
+
 #### Types
 
 - Fixed window size
   - <ProblemBadge difficulty="Medium" /> [2461. Maximum Sum of Distinct Subarrays
     With Length K](https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/description/)
 - Variable window size
+  - Approach:
+    - **Initialize window indices**: Start with `start` and `end` pointers at the first element.
+    - **Expand the window**: Increment the `end` pointer to expand the window if conditions are met.
+    - **Process the window**: Perform required operations when the window meets criteria.
+    - **Adjust the window size**: Move the `start` pointer to adjust size and meet desired criteria.
   - <ProblemBadge difficulty="Medium" /> [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/description/)
+
+#### Real World examples
+
+- **Data Compression**: Sliding window compression algorithms, like [LZ77](https://en.wikipedia.org/wiki/LZ77_and_LZ78) and its variants, use a window to find repeated patterns in the input data and replace them with references to previous occurrences.
+- **Image Processing**: In image processing, a sliding window can be employed for tasks such as feature extraction, object detection, or image segmentation.
+- **Signal Processing**: Time-series data can be analyzed using a sliding window to capture local patterns, trends, or anomalies.
 
 <details>
 <summary>
@@ -228,7 +248,7 @@ Maintain a dynamic window that slides through the array or string, adjusting its
   link="https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/description/"
   difficulty="Medium"
     example={{
-    input: "`nums` = [1,5,4,2,9,9,9], k = 3",
+    input: "nums = [1,5,4,2,9,9,9], k = 3",
     output: "15",
     explanation: "The subarray of length 3 with max sum of 15 is [4,2,9]"
 }}
@@ -299,6 +319,42 @@ class Solution:
                 left += 1
 
         return res if res != float('inf') else 0
+```
+
+<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+
+---
+
+<Problem
+  title="1456. Maximum Number of Vowels in a Substring of Given Length"
+  link="https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/description/"
+  difficulty="Medium"
+  example={{
+    input: "s = \"abciiidef\", k = 3",
+    output: "3",
+    explanation:
+      "The substring \"iii\" contains 3 vowel letters.",
+  }}
+>
+
+Given a string `s` and an integer `k`, return the maximum number of vowel letters in any substring of s with length `k`.
+
+</Problem>
+
+```py filename="1456. Maximum Number of Vowels in a Substring of Given Length"
+class Solution:
+    def maxVowels(self, s: str, k: int) -> int:
+        vowels = set("aeiou")
+        count = 0
+        for i in range(k):
+            count += int(s[i] in vowels)
+        answer = count
+        for i in range(k, len(s)):
+            count += int(s[i] in vowels)
+            count -= int(s[i - k] in vowels)
+            answer = max(answer, count)
+
+        return answer
 ```
 
 <ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
