@@ -453,11 +453,39 @@ This method is based on the principle:
 > GCD doesn't change if we replace bigger number by difference of 2 numbers: `gcd(a, b) = gcd(a - b, b)`
 > To make finding more efficient, `a - b` is changed to `a % b`:
 
-Example problem:
+<details>
+<summary>
 
-**[2807. Insert Greatest Common Divisors in Linked List](https://leetcode.com/problems/insert-greatest-common-divisors-in-linked-list/description)**
+#### Problem examples
 
-```py
+</summary>
+
+<Problem
+  title="2807. Insert Greatest Common Divisors in Linked List"
+  link="https://leetcode.com/problems/insert-greatest-common-divisors-in-linked-list/description"
+  difficulty="Medium"
+>
+Given the head of a linked list head, in which each node contains an integer value.
+
+Between every pair of adjacent nodes, insert a new node with a value equal to the greatest common divisor of them.
+
+Return the linked list after insertion.
+
+The greatest common divisor of two numbers is the largest positive integer that evenly divides both numbers.
+
+</Problem>
+
+<Image
+  src="/algorithms-cheatsheet/2807.png"
+  width="718"
+  height="404"
+  alt="Insert Greatest Common Divisors in Linked List example"
+  priority={true}
+/>
+
+<br />
+
+```py filename="2807. Insert Greatest Common Divisors in Linked List"
 class Solution:
     def insertGreatestCommonDivisors(self, head: Optional[ListNode]) -> Optional[ListNode]:
         def get_gcd(a, b):
@@ -472,8 +500,13 @@ class Solution:
         return head
 ```
 
+<ProblemComplexity tc="\(O(n \cdot \log(\min(a,b)))\)" sc="\(O(1)\)" />
+
+</details>
+
 ### Prefix sums
 
-**Use cases:**
+#### Use cases
 
-- Find a number of continuous **Find a number of continuous subarrays/submatrices/tree paths that sum to target** paths that sum to target [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/description/)
+- Find a number of continuous subarrays / submatrices / tree paths that sum to target paths that sum to target
+  - <ProblemBadge difficulty="Medium" /> [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/description/)
