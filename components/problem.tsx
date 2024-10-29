@@ -1,11 +1,4 @@
 import ProblemBadge from "@/components/problemBadge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import type { PropsWithChildren } from "react";
 
 interface LeetCodeProblemProps extends PropsWithChildren {
@@ -27,26 +20,26 @@ export default function Problem({
   link,
 }: LeetCodeProblemProps) {
   return (
-    <Card className="w-full max-w-2xl mx-auto shadow-none border-none">
-      <CardHeader className="pb-4">
+    <div className="w-full max-w-2xl mx-auto bg-transparent">
+      <div className="pb-4">
         <div className="flex justify-between items-center">
-          <CardTitle className="text-xl font-bold mt-2">
+          <h2 className="text-xl font-bold mt-2">
             <a className="text-xl" href={link}>
               {title}
             </a>
-          </CardTitle>
+          </h2>
         </div>
-        <CardDescription>
+        <div>
           <ProblemBadge difficulty={difficulty} />
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="text-gray-700">{children}</div>
+        </div>
+      </div>
+      <div>
+        <div>{children}</div>
 
         {example && (
           <div>
             <p className="font-semibold mb-2">Example:</p>
-            <div className="bg-gray-100 p-4 rounded-md">
+            <div className="bg-gray-400 bg-opacity-10 p-4 rounded-md">
               <div>
                 <span className="font-semibold">Input:</span> {example.input}
               </div>
@@ -60,7 +53,7 @@ export default function Problem({
             </div>
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
