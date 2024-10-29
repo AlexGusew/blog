@@ -21,7 +21,7 @@ const createH = (Element: HeaderLevel) => {
       <Element id={anchor} className="[&:hover>*]:opacity-40">
         {children}
         <a href={link} className="absolute translate-x-2.5 opacity-0 w-4">
-          §
+          #
         </a>
       </Element>
     );

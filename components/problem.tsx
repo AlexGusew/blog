@@ -20,7 +20,7 @@ export default function Problem({
   link,
 }: LeetCodeProblemProps) {
   return (
-    <div className="w-full max-w-2xl mx-auto bg-transparent">
+    <div className="w-full max-w-2xl mx-auto bg-transparent text-zinc-500 dark:text-zinc-400">
       <div className="pb-4">
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-bold mt-2">
@@ -35,7 +35,6 @@ export default function Problem({
       </div>
       <div>
         <div>{children}</div>
-
         {example && (
           <div>
             <p className="font-semibold mb-2">Example:</p>
