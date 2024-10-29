@@ -17,9 +17,8 @@ date: "2024-10-28"
 - [Dijkstra's shortest path](#dijkstras-shortest-path)
 - [Dynamic Programming](#dynamic-programming)
 - [Traversals](#traversals)
-- [Prefix sums](#prefix-sums)
-- [Greatest Common Divisor (GCD)](#greatest-common-divisor-gcd)
 - [Matrix](#matrix)
+- [Bonus](#bonus)
 
 </details>
 
@@ -432,13 +431,20 @@ Resources:
 1. **DLS** (Depth Limited Search) - DFS but with limited depth
 1. **IDDFS** (Iterative Deepening Depth First Search) - DLS with increasing depth limit (1, 2, 3, ...) until target is found
 
-## Prefix sums
+## Matrix
 
-**Usecases:**
+[Miro 🔗](https://miro.com/app/board/uXjVLeqOC3Q=/?share_link_id=441000358084)
 
-- Find a number of continuous **Find a number of continuous subarrays/submatrices/tree paths that sum to target** paths that sum to target [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/description/)
+**Problems with matrices**
 
-## Greatest Common Divisor (GCD)
+1. Traverse in some order - [Spiral matrix](https://leetcode.com/problems/spiral-matrix-iv/description/)
+2. Transform matrix - [Rotate image (matrix rotation)](https://leetcode.com/problems/rotate-image/description/)
+3. Traverse on matrix as Graph (DFS, BFS, others) - [The Maze](https://leetcode.com/problems/the-maze/description/)
+4. DP on matrix - [Maximal Square](https://leetcode.com/problems/maximal-square/description/)
+
+## Bonus
+
+### Greatest Common Divisor (GCD)
 
 **Euclidean method** [🔗](https://en.wikipedia.org/wiki/Euclidean_algorithm)
 
@@ -466,13 +472,8 @@ class Solution:
         return head
 ```
 
-## Matrix
+### Prefix sums
 
-[Miro 🔗](https://miro.com/app/board/uXjVLeqOC3Q=/?share_link_id=441000358084)
+**Use cases:**
 
-**Problems with matrices**
-
-1. Traverse in some order - [Spiral matrix](https://leetcode.com/problems/spiral-matrix-iv/description/)
-2. Transform matrix - [Rotate image (matrix rotation)](https://leetcode.com/problems/rotate-image/description/)
-3. Traverse on matrix as Graph (DFS, BFS, others) - [The Maze](https://leetcode.com/problems/the-maze/description/)
-4. DP on matrix - [Maximal Square](https://leetcode.com/problems/maximal-square/description/)
+- Find a number of continuous **Find a number of continuous subarrays/submatrices/tree paths that sum to target** paths that sum to target [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/description/)
