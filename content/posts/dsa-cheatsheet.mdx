@@ -14,6 +14,7 @@ date: "2024-10-28"
 - [Two pointers](#two-pointers)
 - [Sliding window](#sliding-window)
 - [Intervals](#intervals)
+- [Linked List](#linked-list)
 - [Greedy](#greedy)
 - [Dijkstra's shortest path](#dijkstras-shortest-path)
 - [Dynamic Programming](#dynamic-programming)
@@ -739,6 +740,282 @@ class Solution:
 
 - [Interval cheatsheet for coding interviews](https://www.techinterviewhandbook.org/algorithms/interval/)
 - [Merge Intervals](https://www.educative.io/courses/grokking-coding-interview/merge-intervals)
+
+</details>
+
+## Linked List
+
+<AlgorithmSummary
+  tc={{ latex: "$$O(1)\\;or\\;O(n)$$" }}
+  sc={{ latex: "$$O(1))$$" }}
+/>
+
+This section focuses on **in-place** operations with Linked Lists.
+
+#### Properties
+
+- Sequential data structure (like array, unlike tree)
+- Slow access, but fast add / delete operations
+
+#### Operation to Time Complexity
+
+- Access: $O(n)$
+- Search: $O(n)$
+- Insert: $O(1)$
+- Remove: $O(1)$
+
+#### Types
+
+- Singly-linked list
+- Doubly-linked list
+- Circular-linked list
+
+#### Example of Linked List
+
+```py filename="Typical ListNode in LeetCode"
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+first_node = ListNode(1)
+second_node = ListNode(2)
+
+first_node.next = second_node
+```
+
+```py
+┌─────┐    ┌─────┐
+│  1  ┼───►│  2  ┼───x
+└─────┘    └─────┘
+```
+
+#### Dummy node technique
+
+If operation is going to be performed on head or tail node, we can create `dummy` node, and point `dummy.next` to `head`. It helps not to handle edge cases for head only:
+
+```py filename="dummy node usage example"
+dummy = ListNode()
+dummy.next = head
+
+# perform operations on dummy.next
+# we don't need to handle head specifically
+
+return dummy.next
+```
+
+#### Typical operations with Linked Lists
+
+- **List Node operations**
+  - Swap nodes <ProblemBadge difficulty="Medium" /> [1721. Swapping Nodes in a Linked List](https://leetcode.com/problems/swapping-nodes-in-a-linked-list/description/)
+  - Remove node <ProblemBadge difficulty="Medium" /> [237. Delete Node in a Linked List](https://leetcode.com/problems/delete-node-in-a-linked-list/description/)
+- **Whole List operations**
+  - Reverse <ProblemBadge difficulty="Easy" /> [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/description/)
+  - Reorder <ProblemBadge difficulty="Medium" /> [143. Reorder List](https://leetcode.com/problems/reorder-list/description/)
+  - Split <ProblemBadge difficulty="Medium" /> [725. Split Linked List in Parts](https://leetcode.com/problems/split-linked-list-in-parts/description/)
+  - Merge 2 or more lists <ProblemBadge difficulty="Hard" /> [23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/description/)
+- **Search**
+  - Find middle <ProblemBadge difficulty="Easy" /> [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/description/)
+  - Find cycle <ProblemBadge difficulty="Easy" /> [141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/description/)
+- **Custom data structures** with Linked List under the hood
+  - <ProblemBadge difficulty="Medium" /> [146. LRU Cache](https://leetcode.com/problems/lru-cache/description/)
+  - <ProblemBadge difficulty="Hard" /> [460. LFU Cache](https://leetcode.com/problems/lfu-cache/description/)
+
+#### When to use
+
+- **Linked list restructuring**: The input data is given as a linked list, and the task is to modify its structure without modifying the data of the individual nodes.
+- **In-place modification**: The modifications to the linked list must be made in place, that is, we’re not allowed to use more than $O(1)$ additional space.
+
+<details>
+<summary>
+
+#### Problem examples
+
+</summary>
+
+<br />
+
+<Problem
+  title="206. Reverse Linked List"
+  link="https://leetcode.com/problems/reverse-linked-list/description/"
+  difficulty="Easy"
+>
+
+Given the `head` of a singly linked list, reverse the list, and return the reversed list.
+
+</Problem>
+
+**Iterative approach**
+
+```py filename="206. Reverse Linked List - Iterative"
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        prev = None
+        curr = head
+        while curr:
+            next_temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next_temp
+
+        return prev
+```
+
+<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+
+**Recursive approach**
+
+Note: Space complexity grows to $O(n)$ because each `head` is stored in call stack.
+
+```py filename="206. Reverse Linked List - Recursive"
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if (not head) or (not head.next):
+            return head
+
+        p = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
+        return p
+```
+
+<ProblemComplexity tc="\(O(n)\)" sc="\(O(n)\)" />
+
+---
+
+<Problem
+  title="141. Linked List Cycle"
+  link="https://leetcode.com/problems/linked-list-cycle/description/"
+  difficulty="Easy"
+>
+
+Given `head`, the head of a linked list, determine if the linked list has a **cycle** in it.
+
+Return `true` if there is a cycle in the linked list. Otherwise, return `false`.
+
+```py
+┌─────┐    ┌─────┐    ┌─────┐
+│  1  ┼───►│  2  ┼───►│  3  ┼─┐
+└─────┘    └─────┘    └─────┘ │
+  ▲                           │
+  └───────────────────────────┘
+```
+
+</Problem>
+
+```py filename="141. Linked List Cycle - Floyd's Cycle Finding Algorithm"
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        if head is None:
+            return False
+        slow = head
+        fast = head.next
+        while slow != fast:
+            if fast is None or fast.next is None:
+                return False
+            slow = slow.next
+            fast = fast.next.next
+        return True
+```
+
+<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+
+---
+
+<Problem
+  title="143. Reorder List"
+  link="https://leetcode.com/problems/reorder-list/description/"
+  difficulty="Medium"
+>
+
+You are given the `head` of a singly linked-list. The list can be represented as:
+
+**L<sub>0</sub> → L<sub>1</sub> → … → L<sub>n - 1</sub> → L<sub>n</sub>**
+
+Reorder the list to be on the following form:
+
+**L<sub>0</sub> → L<sub>n</sub> → L<sub>1</sub> → L<sub>n - 1</sub> → L<sub>2</sub> → L<sub>n - 2</sub> → …**
+
+You may not modify the values in the list's nodes. Only nodes themselves may be changed.
+
+**Visual algorithm**
+
+```py
+1. Initial list:
+┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
+│  1  ┼───►│  2  ┼───►│  3  ┼───►│  4  ┼───►│  5  ┼───►null
+└─────┘    └─────┘    └─────┘    └─────┘    └─────┘
+
+2. Find middle (middle points to 3):
+┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
+│  1  ┼───►│  2  ┼───►│  3  ┼───►│  4  ┼───►│  5  ┼───►null
+└─────┘    └─────┘    └─────┘    └─────┘    └─────┘
+                         ▲
+                      middle
+
+3. Reverse second half (4->5 becomes 5->4):
+┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
+│  1  ┼───►│  2  ┼───►│  3  ┼───►│  4  ◄────│  5  │
+└─────┘    └─────┘    └─────┘    └─────┘    └─────┘
+                                             prev
+
+4. Start merging (first=1, second=5):
+┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
+│  1  ┼─┐  │  2  ┼───►│  3  ┼───►│  4  ◄────│  5  │
+└─────┘ │  └─────┘    └─────┘    └─────┘    └─────┘
+        │                                       ▲
+        └───────────────────────────────────────┘
+
+5. Final reordered list:
+┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
+│  1  ┼───►│  5  ┼───►│  2  ┼───►│  4  ┼───►│  3  ┼───►null
+└─────┘    └─────┘    └─────┘    └─────┘    └─────┘
+```
+
+</Problem>
+
+```py filename="143. Reorder List"
+class Solution:
+    def reorderList(self, head: ListNode) -> None:
+        if not head:
+            return
+
+        # find the middle of linked list [Problem 876]
+        # in 1->2->3->4->5->6 find 4
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        # reverse the second part of the list [Problem 206]
+        # convert 1->2->3->4->5->6 into 1->2->3->4 and 6->5->4
+        # reverse the second half in-place
+        prev, curr = None, slow
+        while curr:
+            curr.next, prev, curr = prev, curr, curr.next
+
+        # merge two sorted linked lists [Problem 21]
+        # merge 1->2->3->4 and 6->5->4 into 1->6->2->5->3->4
+        first, second = head, prev
+        while second.next:
+            first.next, first = second, first.next
+            second.next, second = first, second.next
+```
+
+<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+
+</details>
+
+<details>
+<summary>
+
+#### Additional materials
+
+</summary>
+
+- [Become Master In Linked List - LeetCode Discuss](https://leetcode.com/discuss/study-guide/1800120/become-master-in-linked-list)
+- [What’s a Linked List, Anyway? [Part 1] | by Vaidehi Joshi | basecs | Medium](https://medium.com/basecs/whats-a-linked-list-anyway-part-1-d8b7e6508b9d)
+- [Linked list cheatsheet for coding interviews](https://www.techinterviewhandbook.org/algorithms/linked-list/)
 
 </details>
 
