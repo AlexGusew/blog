@@ -45,10 +45,12 @@ export default function Problem({
               <div>
                 <span className="font-semibold">Output:</span> {example.output}
               </div>
-              <div>
-                <span className="font-semibold">Explanation:</span>{" "}
-                {example.explanation}
-              </div>
+              {!!example.explanation && (
+                <div>
+                  <span className="font-semibold">Explanation:</span>{" "}
+                  {example.explanation}
+                </div>
+              )}
             </div>
           </div>
         )}
