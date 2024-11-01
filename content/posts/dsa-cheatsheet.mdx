@@ -289,7 +289,7 @@ Convert **multiple nested loops into single loop**, reducing the time complexity
   title="904. Fruit Into Baskets" 
   link="https://leetcode.com/problems/fruit-into-baskets/description/"
   difficulty="Medium"
-    example={{
+  example={{
     input: "fruits = [0,1,2,2]",
     output: "3",
     explanation: "We can pick from trees [1,2,2]. If we had started at the first tree, we would only pick from trees [0,1]."
@@ -338,6 +338,8 @@ class Solution:
 ```
 
 <ProblemComplexity tc="\(O(n^2)\)" sc="\(O(1)\)" />
+
+---
 
 ```py filename="904. Fruit Into Baskets. Sliding window approach"
 class Solution:
@@ -481,6 +483,19 @@ class Solution:
 
 </details>
 
+<details>
+<summary>
+
+#### Additional materials
+
+</summary>
+
+- [Sliding Window - USACO Guide](https://usaco.guide/gold/sliding-window?lang=py)
+- [Mastering Sliding Window Techniques | by Ankit Singh | Medium](https://medium.com/@rishu__2701/mastering-sliding-window-techniques-48f819194fd7)
+- [Sliding Window Technique: A Comprehensive Guide - LeetCode Discuss](https://leetcode.com/discuss/interview-question/3722472/mastering-sliding-window-technique-a-comprehensive-guide)
+
+</details>
+
 ## Intervals
 
 <AlgorithmSummary tc={{ latex: "$$O(n)$$" }} sc={{ latex: "$$O(1)$$" }} />
@@ -535,33 +550,195 @@ Common tasks with intervals:
 <br />
 
 <Problem
-  title="167. Two Sum II - Input Array Is Sorted"
-  link="https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description"
+  title="56. Merge Intervals"
+  link="https://leetcode.com/problems/merge-intervals/description/"
   difficulty="Medium"
+  example={{
+    input: "intervals = [[1,3], [2,6], [8,10], [15,18]]",
+    output: "[[1,6], [8,10], [15,18]]",
+    explanation: "Since intervals [1,3] and [2,6] overlap, merge them into [1,6].",
+  }}
 >
 
-Given a 1-indexed array of integers `numbers` that is already sorted in non-decreasing order, find two numbers such that they add up to a specific `target` number.
+Given an array of intervals where <code>intervals[i] = [start<sub>i</sub>, end<sub>i</sub>]</code>, merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
 
 </Problem>
 
-```py filename="167. Two Sum II - Input Array Is Sorted"
+```py filename="56. Merge Intervals"
 class Solution:
-    def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        low = 0
-        high = len(numbers) - 1
-        while low < high:
-            sum = numbers[low] + numbers[high]
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort(key=lambda x: x[0])
+        merged = []
 
-            if sum == target:
-                return [low + 1, high + 1]
-            elif sum < target:
-                low += 1
+        for interval in intervals:
+            if not merged or merged[-1][1] < interval[0]:
+                merged.append(interval)
             else:
-                high -= 1
-        return [-1, -1]
+                merged[-1][1] = max(merged[-1][1], interval[1])
+
+        return merged
 ```
 
-<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+<ProblemComplexity
+  tc="\(O(n*log(n))\)"
+  sc="\(O(n)\) or \(O(log(n))\) depending on sorting algorithm"
+/>
+
+---
+
+<Problem
+  title="57. Insert Interval"
+  link="https://leetcode.com/problems/insert-interval/description/"
+  difficulty="Medium"
+    example={{
+    input: "intervals = [[1,2], [3,5], [6,7], [8,10], [12,16]], newInterval = [4,8]",
+    output: "[[1,2], [3,10], [12,16]]",
+    explanation: "Because the new interval [4,8] overlaps with [3,5], [6,7], [8,10].",
+  }}
+>
+
+You are given an array of non-overlapping intervals `intervals` where <code>intervals[i] = [start<sub>i</sub>, end<sub>i</sub>]</code> represent the start and the end of the <code>i<sup>th</sup></code> interval and `intervals` is sorted in ascending order by <code>start<sub>i</sub></code>. You are also given an interval `newInterval = [start, end]` that represents the start and end of another interval.
+
+Insert `newInterval` into `intervals` such that `intervals` is still sorted in ascending order by <code>start<sub>i</sub></code> and `intervals` still does not have any overlapping intervals (**merge** overlapping intervals if necessary).
+
+Return intervals after the insertion.
+
+Note that you don't need to modify intervals in-place. You can make a new array and return it.
+
+</Problem>
+
+Problem can be dropped down into 2 subproblems:
+
+1. Find correct place for `newInterval`
+   - Since `intervals` is sorted, we can utilize binary search.
+2. Merge it with any overlapping intervals
+   - Linear iteration over intervals
+
+```py filename="57. Insert Interval"
+class Solution:
+    def insert(
+        self, intervals: List[List[int]], newInterval: List[int]
+    ) -> List[List[int]]:
+        # If the intervals vector is empty, return a vector containing the newInterval
+        if not intervals:
+            return [newInterval]
+
+        n = len(intervals)
+        target = newInterval[0]
+        left, right = 0, n - 1
+
+        # Binary search to find the position to insert newInterval
+        while left <= right:
+            mid = (left + right) // 2
+            if intervals[mid][0] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        # Insert newInterval at the found position
+        intervals.insert(left, newInterval)
+
+        # Merge overlapping intervals
+        res = []
+        for interval in intervals:
+            # If res is empty or there is no overlap, add the interval to the result
+            if not res or res[-1][1] < interval[0]:
+                res.append(interval)
+            # If there is an overlap, merge the intervals by updating the end of the last interval in res
+            else:
+                res[-1][1] = max(res[-1][1], interval[1])
+        return res
+```
+
+<ProblemComplexity tc="\(O(n)\)" sc="\(O(n)\)" />
+
+---
+
+<Problem
+  title="621. Task Scheduler"
+  link="https://leetcode.com/problems/task-scheduler/description/"
+  difficulty="Medium"
+  example={{
+    input: `tasks = ["A","A","A","B","B","B"], n = 2`,
+    output: "8",
+    explanation: <span>A possible sequence is: <code>A → B → idle → A → B → idle → A → B</code>.<br/> After completing task <i>A</i>, you must wait two intervals before doing <i>A</i> again. The same applies to task <i>B</i>. In the 3 interval, neither <i>A</i> nor <i>B</i> can be done, so you <i>idle</i>. By the 4 interval, you can do <i>A</i> again as 2 intervals have passed.</span>
+}}
+
+>
+
+You are given an array of CPU `tasks`, each labeled with a letter from A to Z, and a number `n`. Each CPU interval can be idle or allow the completion of one task. Tasks can be completed in any order, but there's a **constraint**:
+There has to be a gap of at least `n` intervals between two tasks with the same label.
+
+Return the **minimum number** of CPU intervals required to complete all `tasks`.
+
+</Problem>
+
+```py filename="621. Task Scheduler"
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        counter = Counter(tasks)
+        max_heap = [-val for val in counter.values()]
+        heapify(max_heap)
+        res = 0
+        while max_heap:
+            cycle = n + 1
+            tasks = []
+            while cycle and max_heap:
+                task = -heappop(max_heap)
+                cycle -= 1
+                if task > 1:
+                    tasks.append(-(task - 1))
+            while tasks:
+                heappush(max_heap, tasks.pop())
+            res += n + 1 if max_heap else n - cycle + 1
+
+        return res
+```
+
+<ProblemComplexity
+  tc="\(O(n*log(26)) \rightarrow O(n)\)"
+  sc="\(O(26) \rightarrow O(1)\)"
+/>
+
+---
+
+<Problem
+  title="253. Meeting Rooms II"
+  link="https://leetcode.com/problems/meeting-rooms-ii/description/"
+  difficulty="Medium"
+>
+
+Given an array of meeting time intervals `intervals` where <code>intervals[i] = [start<sub>i</sub>, end<sub>i</sub>]</code>, return the **minimum number of conference rooms** required.
+
+</Problem>
+
+```py filename="253. Meeting Rooms II"
+class Solution:
+    def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+        intervals.sort()
+        end_times = []
+        for start, end in intervals:
+            if not end_times or end_times[0] > start:
+                heapq.heappush(end_times, end)
+            else:
+                heapq.heapreplace(end_times, end)
+
+        return len(end_times)
+```
+
+<ProblemComplexity tc="\(O(n*log(n))\)" sc="\(O(n)\)" />
+
+</details>
+
+<details>
+<summary>
+
+#### Additional materials
+
+</summary>
+
+- [Interval cheatsheet for coding interviews](https://www.techinterviewhandbook.org/algorithms/interval/)
+- [Merge Intervals](https://www.educative.io/courses/grokking-coding-interview/merge-intervals)
 
 </details>
 
