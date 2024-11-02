@@ -11,14 +11,15 @@ date: "2024-10-28"
 
 </summary>
 
+- [Time and Space Complexity. Big O Notation](#time-and-space-complexity-big-o-notation)
 - [Two pointers](#two-pointers)
 - [Sliding window](#sliding-window)
 - [Intervals](#intervals)
 - [Linked List](#linked-list)
-- [Heap](#heap)
-- [Two heaps](#two-heaps)
-- [K-Way Merge](#k-way-merge)
-- [Top K Elements](#top-k-elements)
+- [Heap: Introduction](#heap-introduction)
+- [Heap: Two heaps](#heap-two-heaps)
+- [Heap: K-Way Merge](#heap-k-way-merge)
+- [Heap: Top K Elements](#heap-top-k-elements)
 - [Greedy](#greedy)
 - [Dijkstra's shortest path](#dijkstras-shortest-path)
 - [Dynamic Programming](#dynamic-programming)
@@ -31,13 +32,112 @@ date: "2024-10-28"
 <details>
 <summary>
 
-### Definitions
+### TODO - REMOVE Definitions
 
 </summary>
 
 - **Search Space Tree** - tree of possible solutions generated on each iteration of algorithm. It's useful to think of your problem as Search-Space tree.
 
 </details>
+
+## Time and Space Complexity. Big O Notation
+
+#### Time Complexity
+
+Indicated **how fast** algorithm computing time grows when input size grows.
+
+When solving problems, we can compare algorithm **Time Complexity** to input size and validate if given algorithm fits to input size.
+
+**Example**
+$\newcommand\computeTime{0.25 \times 10^{-9}\frac{seconds}{operation}}$
+
+- $O(n!)$ - Time Complexity
+- $4 \text{ GHz}$ - Processor single-core speed
+
+Actual time taken
+
+- How much time it takes for 1 operation computed on $4 \text{ GHz}$ single-core processor $\rightarrow 4 \text{ GHz} = 4 \times 10^9 \frac{operations}{second} \rightarrow \computeTime$
+- If maximum `n = 8` → $8! = 40320$ $\rightarrow 40320 \times \computeTime$ $= 1.008×10^{−5}$ seconds. So, computer will be able to compute it in reasonable time.
+- If maximum `n = 100` → $100! = $  number with 158 digits $\rightarrow 100! \times \computeTime$ $\approx$ $3 \times 10^{150}$ **years**. This is $\approx 2.14 \times 10^{140}$ times longer than our universe 🪐 exists!
+
+#### Big O Notation
+
+Analyzes asymptotic - answers for fast function grows
+
+Associates problem size `n` with processing time to solve problem `t`
+
+#### Best, Worst, and Average Cases
+
+- **Best**: Function performs minimal operations required to solve problem on input of `n` elements
+- **Worst**: Maximum amount of steps required to solve problem on input of `n` elements
+- **Average** Average amount of steps required to solve problem on input of `n` elements
+
+> In real-time computing, the **worst-case** execution time is often of particular concern since it is important to know how much time might be needed in the worst case to **guarantee** that the algorithm will always finish on time.
+
+<div align="right">
+  [Wikipedia](https://en.wikipedia.org/wiki/Best,_worst_and_average_case)
+</div>
+
+#### Example - [Bogosort (Permutation sort)](https://en.wikipedia.org/wiki/Bogosort)
+
+Bogosort creates permutation of input array and checks if it's sorted.
+
+- **Best**: $O_{best}(n)$ - array initially sorted, so it's needed **n** operations to check if each element on right place
+- **Worst**: $O_{worst}(\infty)$ - since bogosort creates random permutation each time, in worst case it will never produce sorted permutation
+- **Average** $O_{avg}(n \times n!)$ - amount of permutations is $n!$
+
+#### Order of Magnitude
+
+A description of a function in terms of big \( O \) notation typically provides only an upper bound on the growth rate of the function.
+
+To calculate Order of Magnitude:
+
+- **Discard constants**:
+
+  - $ 3n^2 + 5 \to n^2 $
+
+- **Pick only the most significant function**:
+  - $ n^2 + 2n + 1 \to n^2 $
+
+#### Typical Operations with Big O Notation
+
+- **Adding** two functions or complexities
+  - $ O(n) + O(m) \to O(n + m)\;\text{or}\;O(\max(n, m)) $
+- **Multiplying** two functions or complexities
+  - $ O(n) \times O(m) \to O(n \times m) $
+
+#### Growth rate comparison
+
+<Image
+  src="/algorithms-cheatsheet/big-o-growth-rate.svg"
+  width="718"
+  height="404"
+  alt="Trapping Rain Water example"
+/>
+
+<details>
+<summary>
+
+#### Additional materials
+
+</summary>
+
+- [Big-O Cheat Sheet - Algorithm Complexity Analysis](https://www.bigocheatsheet.com/)
+- [Competitive Programmer's Handbook - Time Complexity](https://usaco.guide/CPH.pdf#page=30)
+
+</details>
+
+#### Space Complexity
+
+Space complexity measures the memory required by an algorithm as a function of the input size
+
+In Big $ O $ notation, common space complexities include:
+
+- $ O(1) $ for constant space
+- $ O(n) $ for linear space, and
+- $ O(n^2) $ for quadratic space.
+
+Optimizing Space complexity can lead to more efficient algorithms, especially in **large-scale** data processing.
 
 ## Two pointers
 
@@ -1021,7 +1121,7 @@ class Solution:
 
 </details>
 
-## Heap
+## Heap: Introduction
 
 <AlgorithmSummary
   tc={{
@@ -1173,35 +1273,6 @@ class Solution:
 ---
 
 <Problem
-  title="347. Top K Frequent Elements"
-  link="https://leetcode.com/problems/top-k-frequent-elements/description/"
-  difficulty="Medium"
-  example={{
-    input: "nums = [1,1,1,2,2,3], k = 2",
-    output: "[1,2]"
-  }}
->
-
-Given an integer array `nums` and an integer `k`, return the `k` most frequent elements. You may return the answer in any order.
-
-</Problem>
-
-```py filename="347. Top K Frequent Elements"
-class Solution:
-    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        heap = []
-        for num, freq in Counter(nums).items():
-            heapq.heappush(heap, (freq, num))
-            if len(heap) > k:
-                heapq.heappop(heap)
-        return [num for freq, num in heap]
-```
-
-<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(n + k)\)" />
-
----
-
-<Problem
   title="373. Find K Pairs with Smallest Sums"
   link="https://leetcode.com/problems/find-k-pairs-with-smallest-sums/description"
   difficulty="Medium"
@@ -1278,7 +1349,7 @@ Here, $m$ is the size of `nums1` and $n$ is the size of `nums2`:
 
 </details>
 
-## Two heaps
+## Heap: Two heaps
 
 <AlgorithmSummary
   tc={{ latex: "$$O(n*log(k))$$" }}
@@ -1475,7 +1546,7 @@ Two heaps approach is used when median calculation needed
 
 </details>
 
-## K-Way Merge
+## Heap: K-Way Merge
 
 <AlgorithmSummary
   tc={{ latex: "$$O(n*log(k))$$" }}
@@ -1654,6 +1725,7 @@ class Solution:
 
 </summary>
 
+- [K-way merge intro](https://docs.google.com/presentation/d/1mgOjC2VUhRjwXSkxtfz2D8d-KG7gE9KGRlsQ1glqwxs/edit?usp=sharing)
 - [Wikipedia - K-way merge algorithm](https://en.wikipedia.org/wiki/K-way_merge_algorithm)
 - [Baeldung - 2-Way vs K-Way Merge](https://www.baeldung.com/cs/2-way-vs-k-way-merge)
 - [Emre.me - K-way Merge](https://emre.me/coding-patterns/k-way-merge/)
@@ -1675,14 +1747,16 @@ class Solution:
 
 </details>
 
-## Top K Elements
+## Heap: Top K Elements
 
 <AlgorithmSummary
   tc={{ latex: "$$O(n*log(n))$$" }}
   sc={{ latex: "$$O(k)$$" }}
 />
 
-The `top k` elements pattern is crucial for efficiently finding a specific number of elements, k, from a dataset, especially for identifying extremes or frequency-based elements in an unsorted collection.
+The `top k` elements pattern is crucial for efficiently finding a specific number of elements, `k`, from a dataset.
+
+Maintain a `heap` of size `k` while iterating through the list of elements
 
 #### Time Complexity
 
@@ -1703,13 +1777,19 @@ A heap is ideal for managing the smallest or largest **k elements**. By using a 
 
 #### Efficiency
 
-Thanks to heap:
+**Time complexity** of Top K approach using heap:
 
 - $O(log(k))$ - insertions and removals
 - $O(n*log(k))$ - processing all elements
 - $O(k*log(k))$ - retrieving all `k` elements, due to reorganization after each removal.
 
-Summary
+**Time complexity comparison**
+
+**n** - number of all items. **k** - top k elements
+
+- Brute force - $O(n^2)$
+- Sorting - $O(n * log(n))$
+- Heap - $O(n * log(k))$
 
 #### Typical problems
 
@@ -1721,7 +1801,23 @@ Summary
 
 - **Unsorted List Analysis**: Task involves extracting a specific subset (largest, smallest, most/least frequent) from an unsorted list, either as the final goal or an intermediate step.
 - **Identifying a Specific Subset**: To identify a subset based on criteria like **top k**, <code>k<sub>th</sub> largest/smallest</code>, or **k most frequent**, indicating the top k elements pattern is a fit.
-  variations
+
+#### How to identify Top K pattern
+
+- Top k element
+- Smallest / Biggest element
+- Most / Least frequent k elements
+- Furthest / Nearest
+- Given Unsorted data
+
+#### Pitfalls
+
+- Sometimes mathematical approach faster
+- Sometimes other patterns faster: [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/description/)
+  - [Quickselect](https://en.wikipedia.org/wiki/Quickselect) - Average Time Complexity $O(n)$
+  - Heap - Average Time Complexity $O(n \times \log k)$
+- If data is sorted, use **binary search** or others
+- If need to find one extremum, heap is not needed
 
 <details>
 <summary>
@@ -1731,6 +1827,35 @@ Summary
 </summary>
 
 <br />
+
+<Problem
+  title="347. Top K Frequent Elements"
+  link="https://leetcode.com/problems/top-k-frequent-elements/description/"
+  difficulty="Medium"
+  example={{
+    input: "nums = [1,1,1,2,2,3], k = 2",
+    output: "[1,2]"
+  }}
+>
+
+Given an integer array `nums` and an integer `k`, return the `k` most frequent elements. You may return the answer in any order.
+
+</Problem>
+
+```py filename="347. Top K Frequent Elements"
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        heap = []
+        for num, freq in Counter(nums).items():
+            heapq.heappush(heap, (freq, num))
+            if len(heap) > k:
+                heapq.heappop(heap)
+        return [num for freq, num in heap]
+```
+
+<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(n + k)\)" />
+
+---
 
 <Problem
   title="767. Reorganize String"
@@ -2049,5 +2174,3 @@ class Solution:
 
 - Find a number of continuous subarrays / submatrices / tree paths that sum to target paths that sum to target
   - <ProblemBadge difficulty="Medium" /> [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/description/)
-
-### Time and Space Complexity. Big O notation
