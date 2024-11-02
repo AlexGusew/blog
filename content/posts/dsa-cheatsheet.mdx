@@ -17,6 +17,7 @@ date: "2024-10-28"
 - [Linked List](#linked-list)
 - [Heap](#heap)
 - [Two heaps](#two-heaps)
+- [K-Way Merge](#k-way-merge)
 - [Greedy](#greedy)
 - [Dijkstra's shortest path](#dijkstras-shortest-path)
 - [Dynamic Programming](#dynamic-programming)
@@ -1280,6 +1281,11 @@ Here, $m$ is the size of `nums1` and $n$ is the size of `nums2`:
 
 ## Two heaps
 
+<AlgorithmSummary
+  tc={{ latex: "$$O(n*log(k))$$" }}
+  sc={{ latex: "$$O(k)$$" }}
+/>
+
 Two heaps approach used to find out middle of moving dataset
 
 - <ProblemBadge difficulty="Hard" /> [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/description/)
@@ -1467,6 +1473,206 @@ Two heaps approach is used when median calculation needed
 
 - **Video platforms**: median age of the viewers
 - **Gaming matchmaking**: Matching players of similar skill levels
+
+</details>
+
+## K-Way Merge
+
+<AlgorithmSummary
+  tc={{ latex: "$$O(n*log(k))$$" }}
+  sc={{ latex: "$$O(k)$$" }}
+/>
+
+The **K-way merge** pattern combines **k** sorted data structures into a single **sorted** output.
+
+It works by repeatedly selecting the smallest (or largest) element from among the first elements of each input list and adding it to the output list, continuing until all elements are merged in order.
+
+K-way merge of sorted data could be achieved by:
+
+- **Heaps**
+- **Merge sort**
+
+**Min Heap Approach**:
+
+1. Insert first element from each list into min heap
+2. Remove heap's top element, add to output
+3. Replace with next element from same input list
+4. Repeat until all elements merged
+
+**Divide & Merge (merge sort)**:
+
+1. Divide lists into 2 parts and merge each part
+2. Continue dividing and merging resulting lists
+3. Repeat until single sorted list remains
+
+#### Typical problems
+
+- <ProblemBadge difficulty="Medium" /> [378. Kth Smallest Element in a Sorted Matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/)
+- <ProblemBadge difficulty="Medium" /> [373. Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/description/)
+- <ProblemBadge difficulty="Hard" /> [23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/description/)
+
+#### When to use
+
+- **Merging sorted arrays/matrix** rows/columns into a single sorted sequence
+- **Finding kth smallest/largest** element across multiple sorted collections (like finding median in multiple sorted arrays)
+
+<details>
+<summary>
+
+#### Problem examples
+
+</summary>
+
+<br />
+
+<Problem
+  title="378. Kth Smallest Element in a Sorted Matrix"
+  link="https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/"
+  difficulty="Medium"
+  example={{
+    input: "matrix = [[1,5,9],[10,11,13],[12,13,15]], k = 8",
+    output: "13",
+    explanation: "The elements in the matrix are [1,5,9,10,11,12,13,13,15], and the 8th smallest number is 13"
+  }}
+>
+
+Given an `n x n` matrix where each of the rows and columns is sorted in ascending order, return the <code>k<sub>th</sub></code> smallest element in the matrix.
+
+Note that it is the <code>k<sub>th</sub></code> smallest element in the sorted order, not the <code>k<sub>th</sub></code> distinct element.
+
+You must find a solution with a memory complexity better than $O(n^2)$.
+
+</Problem>
+
+```py filename="378. Kth Smallest Element in a Sorted Matrix"
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        min_heap = [(row[0], i, 0) for i, row in enumerate(matrix)]
+        heapify(min_heap)
+
+        while k:
+            val, i, j = heappop(min_heap)
+            k -= 1
+            if j + 1 < len(matrix):
+                heappush(min_heap, (matrix[i][j + 1], i, j + 1))
+
+        return val
+```
+
+<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(k)\)" />
+
+---
+
+<Problem
+  title="373. Find K Pairs with Smallest Sums"
+  link="https://leetcode.com/problems/find-k-pairs-with-smallest-sums/description/"
+  difficulty="Medium"
+  example={{
+    input: "nums1 = [1,7,11], nums2 = [2,4,6], k = 3",
+    output: "[[1,2],[1,4],[1,6]]",
+    explanation: "The first 3 pairs are returned from the sequence: [1,2],[1,4],[1,6],[7,2],[7,4],[11,2],[7,6],[11,4],[11,6]"
+  }}
+>
+
+You are given two integer arrays `nums1` and `nums2` sorted in non-decreasing order and an integer `k`.
+
+Define a pair `(u, v)` which consists of one element from the first array and one element from the second array.
+
+Return the `k` pairs <code>(u<sub>1</sub>, v<sub>1</sub>), (u<sub>2</sub>, v<sub>2</sub>), ..., (u<sub>k</sub>, v<sub>k</sub>)</code> with the **smallest sums**.
+
+</Problem>
+
+```py filename="373. Find K Pairs with Smallest Sums"
+class Solution:
+    def kSmallestPairs(
+        self, nums1: List[int], nums2: List[int], k: int
+    ) -> List[List[int]]:
+        heap, seen, res = [(nums1[0] + nums2[0], 0, 0)], {(0, 0)}, []
+        while heap and len(res) < k:
+            _, i, j = heappop(heap)
+            res.append([nums1[i], nums2[j]])
+            for i2, j2 in [(i, j + 1), (i + 1, j)]:
+                if i2 < len(nums1) and j2 < len(nums2) and (i2, j2) not in seen:
+                    seen.add((i2, j2))
+                    heappush(heap, (nums1[i2] + nums2[j2], i2, j2))
+        return res
+```
+
+<ProblemComplexity tc="\(O(k*log(k))\)" sc="\(O(k)\)" />
+
+---
+
+<Problem
+  title="23. Merge k Sorted Lists"
+  link="https://leetcode.com/problems/merge-k-sorted-lists/description/"
+  difficulty="Hard"
+  example={{
+    input: "lists = [[1,4,5],[1,3,4],[2,6]]",
+    output: "[1,1,2,3,4,4,5,6]",
+    explanation: <div>The linked-lists are:<br/>
+  1-&gt;4-&gt;5<br/>
+  1-&gt;3-&gt;4<br/>
+  2-&gt;6<br/>
+Merging them into one sorted list:<br/>
+1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6
+</div>
+  }}
+>
+
+You are given an array of `k` linked-lists lists, each linked-list is sorted in ascending order.
+
+Merge all the linked-lists into one sorted linked-list and return it.
+
+</Problem>
+
+```py filename="23. Merge k Sorted Lists"
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        head = cur = ListNode()
+        heap = []
+        for i, node in enumerate(lists):
+            if not node:
+                continue
+            heappush(heap, (node.val, i))
+        while heap:
+            val, min_node_idx = heappop(heap)
+            min_node = lists[min_node_idx]
+            cur.next, cur = min_node, min_node
+            if min_node.next:
+                lists[min_node_idx] = min_node.next
+                heappush(heap, (min_node.next.val, min_node_idx))
+        return head.next
+```
+
+<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(k)\)" />
+
+</details>
+
+<details>
+<summary>
+
+#### Additional materials
+
+</summary>
+
+- [Wikipedia - K-way merge algorithm](https://en.wikipedia.org/wiki/K-way_merge_algorithm)
+- [Baeldung - 2-Way vs K-Way Merge](https://www.baeldung.com/cs/2-way-vs-k-way-merge)
+- [Emre.me - K-way Merge](https://emre.me/coding-patterns/k-way-merge/)
+
+</details>
+
+<details>
+<summary>
+
+#### Real World usage
+
+</summary>
+
+- **Patient Records Aggregation**: In healthcare, integrating data from multiple sources like lab results and physician notes into a single record is vital. The K-way merge efficiently combines these data streams, aiding in diagnosis and treatment.
+
+- **Financial Transaction Merging**: For financial institutions, merging transactions from different sources into a single stream is essential for analysis or fraud detection. K-way merge organizes these transactions coherently, improving financial monitoring and analysis.
+
+- **Log File Analysis**: Web services generate logs from multiple servers. Merging these into one stream for analysis requires the K-way merge, making it easier to analyze user behavior or system performance with minimal preprocessing.
 
 </details>
 
