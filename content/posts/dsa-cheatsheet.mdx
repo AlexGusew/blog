@@ -20,6 +20,7 @@ date: "2024-10-28"
 - [Heap: Two heaps](#heap-two-heaps)
 - [Heap: K-Way Merge](#heap-k-way-merge)
 - [Heap: Top K Elements](#heap-top-k-elements)
+- [Binary search](#binary-search)
 - [Greedy](#greedy)
 - [Dijkstra's shortest path](#dijkstras-shortest-path)
 - [Dynamic Programming](#dynamic-programming)
@@ -88,7 +89,7 @@ Bogosort creates permutation of input array and checks if it's sorted.
 
 #### Order of Magnitude
 
-A description of a function in terms of big \( O \) notation typically provides only an upper bound on the growth rate of the function.
+A description of a function in terms of big $ O $ notation typically provides only an upper bound on the growth rate of the function.
 
 To calculate Order of Magnitude:
 
@@ -1963,6 +1964,327 @@ class Solution:
 - **Financial Markets**: Highlighting top brokers based on transaction volumes or success metrics, sifting through data to spotlight leaders in market activities.
 
 - **Social Media**: Filtering top trending topics by frequency, using the top K elements pattern to analyze hashtags or keywords for content relevancy.
+
+</details>
+
+## Binary search
+
+<AlgorithmSummary tc={{ latex: "$$O(\\log n)$$" }} sc={{ latex: "$$O(1)$$" }} />
+
+**Binary search** - search algorithm in sorted array
+
+1. It works by repeatedly **dividing the search interval in half**.
+   1. If the target value is **less than** the middle element, the search continues in the left half;
+   2. if greater, it continues in the right half.
+2. This process is repeated until the target is found or the interval is empty.
+
+Simple implementation
+
+```py filename="Binary search - Iterative"
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if arr[mid] == target:
+            return mid  # Target found at index mid
+        elif arr[mid] < target:
+            left = mid + 1  # Discard the left half
+        else:
+            right = mid - 1  # Discard the right half
+
+    return -1  # Target not found
+```
+
+#### Modified Binary search
+
+- Modification of Binary search
+- Applies specific conditions or transformations to address unique problems:
+
+1. **Binary Search on a Modified Array**: Array is altered
+   - <ProblemBadge difficulty="Medium" /> [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+     \- sorted and then rotated.
+2. **Binary Search with Multiple Requirements**: Adapt the **comparison** logic to meet multiple conditions:
+   - Finding a range of targets
+   - Identifying the leftmost or rightmost occurrences of a value.
+3. **Finding Conditions**: Identify boundary conditions
+   - <ProblemBadge difficulty="Easy" /> [278. First Bad Version](https://leetcode.com/problems/first-bad-version/)
+     \- locating the first instance that meets a specific criterion.
+
+These modifications allow binary search to efficiently tackle a broader range of problems.
+
+#### Typical problems
+
+- Sorted array
+  - Find value
+  - Find range
+    - <ProblemBadge difficulty="Medium" /> [34. Find First and Last Position of Element
+      in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+- Sorted array is modified (rotated)
+  - <ProblemBadge difficulty="Medium" /> [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+  - <ProblemBadge difficulty="Medium" /> [153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+- Custom comparison (good/bad version)
+  - <ProblemBadge difficulty="Easy" /> [374. Guess Number Higher or Lower](https://leetcode.com/problems/guess-number-higher-or-lower/)
+  - <ProblemBadge difficulty="Easy" /> [278. First Bad Version](https://leetcode.com/problems/first-bad-version/)
+  - <ProblemBadge difficulty="Medium" /> [162. Find Peak Element](https://leetcode.com/problems/find-peak-element/)
+- Task can be represented by sorted data
+  - <ProblemBadge difficulty="Easy" /> [69. Sqrt(x)](https://leetcode.com/problems/sqrtx/)
+- Sorted Matrix
+- Find insertion point
+
+#### Comparison with other algorithms
+
+<Image
+  src="/algorithms-cheatsheet/bin-search-comparison.webp"
+  width="718"
+  height="404"
+  alt="Comparison of Binary search with other algorithms"
+/>
+
+#### When to use
+
+- Time Complexity constraint - $ O(\log n) $
+- Linear data structure with **random access**
+- Data is **sorted**
+- Data structure that supports **direct addressing**: array, matrix
+- There's **no linear data structure**, but data is in **sorted** order
+  - <ProblemBadge difficulty="Easy" /> [278. First Bad Version](https://leetcode.com/problems/first-bad-version/)
+
+#### Challenges using B-Search
+
+- Identify pattern
+- Find proper condition
+- Not to fall into infinite loop
+
+#### Notes
+
+- Pre-processing might be needed
+  - Sort if collection is unsorted
+  - Precompute if needed
+    - <ProblemBadge difficulty="Medium" /> [162. Find Peak Element](https://leetcode.com/problems/find-peak-element/)
+      - Precompute cumulative sum
+- Sometimes we don't want to check found element in loop
+
+```py filename="Internal bisect.py module - bisect_left function"
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if a[mid] < x:
+            lo = mid + 1
+        else:
+            hi = mid
+    return lo
+```
+
+- Beware overflow:
+
+```py
+  mid = left + (right - left) // 2
+  # vs
+  mid = (right + left) // 2
+```
+
+- Sometimes we can use built-in b-search like `bisect_left` in Python
+- Infinite loop:
+
+```py
+  while l <= r:
+    ...
+    l = mid
+```
+
+<details>
+<summary>
+
+#### Real World usage
+
+</summary>
+
+- **Database Searches**: Quickly locate records in sorted tables.
+- **Autocomplete**: Efficiently find suggestions from sorted keyword lists.
+- **Library Catalogs**: Identify book locations in sorted catalogs.
+- **Version Control**: Locate specific changes in sorted commit histories (e.g., Git).
+- **Game Leaderboards**: Find player scores in sorted rankings.
+- **API Pagination**: Access specific data points in sorted datasets.
+- **Image Processing**: Determine thresholds in pixel values for segmentation.
+
+</details>
+
+<details>
+<summary>
+
+#### Problem examples
+
+</summary>
+
+<br />
+
+<Problem
+  title="50. Pow(x, n)"
+  link="https://leetcode.com/problems/powx-n/description/"
+  difficulty="Medium"
+  example={{
+    input: "fruits = [0,1,2,2]",
+    output: "3",
+    explanation: "We can pick from trees [1,2,2]. If we had started at the first tree, we would only pick from trees [0,1]."
+  }}
+>
+
+Implement `pow(x, n)`, which calculates `x` raised to the power `n` (i.e., <code>x<sup>n</sup></code>).
+
+</Problem>
+
+Brute Force
+
+```py filename="50. Pow(x, n) - Brute Force"
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if n == 0:
+            return 1
+        if n < 0:
+            return 1 / pow(x, -n)
+        return x * pow(x, n - 1)
+```
+
+<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+
+Binary search - Recursive
+
+```py filename="50. Pow(x, n) - Binary search - Recursive"
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if n < 0:
+            return 1 / self.myPow(x, -n)
+        if n == 0:
+            return 1
+        if n % 2:
+            return x * self.myPow(x, n - 1)
+        return self.myPow(x * x, n / 2)
+```
+
+<ProblemComplexity tc="\(O(\log n)\)" sc="\(O(\log n)\)" />
+
+Binary search - Iterative
+
+```py filename="50. Pow(x, n) - Binary search - Iterative"
+class Solution:
+    def binaryExp(self, x: float, n: int) -> float:
+        if n == 0:
+            return 1
+
+        if n < 0:
+            n = -1 * n
+            x = 1.0 / x
+
+        result = 1
+        while n != 0:
+            if n % 2 == 1:
+                result *= x
+                n -= 1
+            x *= x
+            n //= 2
+        return result
+```
+
+<ProblemComplexity tc="\(O(\log n)\)" sc="\(O(1)\)" />
+
+---
+
+<Problem
+  title="162. Find Peak Element"
+  link="https://leetcode.com/problems/find-peak-element/description/"
+  difficulty="Medium"
+  example={{
+    input: "nums = [1,2,3,1]",
+    output: "2",
+    explanation: "3 is a peak element and your function should return the index number 2."
+  }}
+>
+
+A **peak element** is an element that is **strictly greater** than its neighbors.
+
+Given a **0-indexed** integer array `nums`, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.
+
+You may imagine that `nums[-1] = nums[n] = -∞`. In other words, an element is always considered to be strictly greater than a neighbor that is outside the array.
+
+You must write an algorithm that runs in $O(\log n)$ time.
+
+</Problem>
+
+<div className="relative flex w-full">
+  <div>
+    Input array - [1, 2, 3, 2]
+    <Image
+      src="/algorithms-cheatsheet/162-chart.svg"
+      width="320"
+      height="202"
+      alt="Example of input data 1"
+    />
+  </div>
+  <div>
+    Input array - [1, 2, 3]
+    <Image
+      src="/algorithms-cheatsheet/162-chart-2.svg"
+      width="320"
+      height="202"
+      alt="Example of input data 2"
+    />
+  </div>
+</div>
+
+**Brute Force**
+
+```py filename="162. Find Peak Element - Brute force"
+def findPeakElement(nums):
+    for i in range(len(nums) - 1):
+        if nums[i] > nums[i + 1]:
+            return i
+    return len(nums) - 1
+```
+
+<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+
+**Binary search - Iterative**
+
+Hints:
+
+- Local peak, not global
+- Items behind array borders (behind first and last) are smaller than boundary items (first and last)
+
+<Image
+  src="/algorithms-cheatsheet/162-bin-search.svg"
+  width="718"
+  height="404"
+  alt="Binary search conditions example"
+/>
+
+```py filename="162. Find Peak Element - Binary search - Iterative"
+def findPeakElement(self, nums):
+    l, r = 0, len(nums) - 1
+    while l < r:
+        mid = (l + r) // 2
+        if nums[mid] > nums[mid + 1]:
+            r = mid
+        else:
+            l = mid + 1
+    return l
+```
+
+<ProblemComplexity tc="\(O(\log n)\)" sc="\(O(1)\)" />
+
+</details>
+
+<details>
+<summary>
+
+#### Additional materials
+
+</summary>
+
+- [LeetCode - Binary Search](https://leetcode.com/explore/learn/card/binary-search/)
+- [LeetCode Discuss - A Noob's Guide to the Binary Search Algorithm](https://leetcode.com/discuss/study-guide/1233854/a-noobs-guide-to-the-binary-search-algorithm)
+- [GitHub - Several Coding Patterns for Solving Data Structures and Algorithms Problems during Interviews](https://github.com/Chanda-Abdul/Several-Coding-Patterns-for-Solving-Data-Structures-and-Algorithms-Problems-during-Interviews/blob/main/%E2%9C%85%20%20Pattern%2011%3A%20Modified%20Binary%20Search.md)
+- [USACO Guide - Binary Search (Python)](https://usaco.guide/silver/binary-search?lang=py)
 
 </details>
 
