@@ -83,3 +83,11 @@ details > summary > * {
 mjx-container > svg {
   display: inline-block;
 }
+
+@media (max-width: 640px) {
+  mjx-math {
+    @apply inline-block;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+  }
+}

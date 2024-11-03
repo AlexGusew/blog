@@ -17,6 +17,14 @@ module.exports = {
             "code::after": {
               content: '""',
             },
+            // Increase specificity by targeting .prose class
+            ".prose blockquote": {
+              fontStyle: "normal",
+              fontWeight: "normal",
+              "& > ::before, & > ::after": {
+                content: "none",
+              },
+            },
           },
         },
       },

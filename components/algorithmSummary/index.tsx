@@ -2,12 +2,7 @@
 
 import Info from "@/components/algorithmSummary/info";
 import { MathJax } from "better-react-mathjax";
-import {
-  Children,
-  type FC,
-  type PropsWithChildren,
-  type ReactNode,
-} from "react";
+import { type FC, type PropsWithChildren } from "react";
 
 interface ListValue {
   raw?: string;
@@ -32,10 +27,10 @@ const AlgorithmSummary: FC<AlgorithmSummaryProps> = ({ children, tc, sc }) => {
         .map(([label, value]) => (
           <div
             key={label + value}
-            className="flex justify-between items-baseline"
+            className="flex flex-wrap justify-between items-baseline"
           >
             <span className="text-sm">{label}</span>
-            {value?.latex && <MathJax>{value.latex}</MathJax>}
+            {value?.latex && <MathJax inline>{value.latex}</MathJax>}
             {value?.raw}
           </div>
         ))}

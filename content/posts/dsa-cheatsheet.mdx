@@ -21,6 +21,7 @@ date: "2024-10-28"
 - [Heap: K-Way Merge](#heap-k-way-merge)
 - [Heap: Top K Elements](#heap-top-k-elements)
 - [Binary search](#binary-search)
+- [Backtracking](#backtracking)
 - [Greedy](#greedy)
 - [Dijkstra's shortest path](#dijkstras-shortest-path)
 - [Dynamic Programming](#dynamic-programming)
@@ -57,7 +58,7 @@ $\newcommand\computeTime{0.25 \times 10^{-9}\frac{seconds}{operation}}$
 
 Actual time taken
 
-- How much time it takes for 1 operation computed on $4 \text{ GHz}$ single-core processor $\rightarrow 4 \text{ GHz} = 4 \times 10^9 \frac{operations}{second} \rightarrow \computeTime$
+- How much time it takes for 1 operation computed on $4 \text{ GHz}$ single-core processor $\rightarrow$ $4 \text{ GHz} = 4 \times 10^9 \frac{operations}{second} $ $\rightarrow$ $ \computeTime$
 - If maximum `n = 8` → $8! = 40320$ $\rightarrow 40320 \times \computeTime$ $= 1.008×10^{−5}$ seconds. So, computer will be able to compute it in reasonable time.
 - If maximum `n = 100` → $100! = $  number with 158 digits $\rightarrow 100! \times \computeTime$ $\approx$ $3 \times 10^{150}$ **years**. This is $\approx 2.14 \times 10^{140}$ times longer than our universe 🪐 exists!
 
@@ -103,7 +104,7 @@ To calculate Order of Magnitude:
 #### Typical Operations with Big O Notation
 
 - **Adding** two functions or complexities
-  - $ O(n) + O(m) \to O(n + m)\;\text{or}\;O(\max(n, m)) $
+  - $ O(n) + O(m) \to O(n + m)$ $\text{or}\;O(\max(n, m)) $
 - **Multiplying** two functions or complexities
   - $ O(n) \times O(m) \to O(n \times m) $
 
@@ -301,8 +302,8 @@ class Solution:
   sc={{
     latex: (
       <ul>
-        <li>\(O(1) - if\;only\;2\;pointers\;tracked\)</li>
-        <li>\(O(w) - if\;window\;elements\;tracked\)</li>
+        <li>\(O(1) - if\;only\;\)\(2\;pointers\;tracked\)</li>
+        <li>\(O(w) - if\;window\;\)\(elements\;tracked\)</li>
       </ul>
     ),
   }}
@@ -609,7 +610,7 @@ Typical interval problem deals with **array of overlapping intervals** e.g. `[[1
 Common tasks with intervals:
 
 - Merging intersecting intervals
-  - <ProblemBadge difficulty="Medium" /> [https://leetcode.com/problems/merge-intervals/description/](https://leetcode.com/problems/merge-intervals/description/)
+  - <ProblemBadge difficulty="Medium" /> [56. Merge Intervals](https://leetcode.com/problems/merge-intervals/description/)
 - Inserting new intervals into existing sets
   - <ProblemBadge difficulty="Medium" /> [57. Insert Interval](https://leetcode.com/problems/insert-interval/description/)
 - Schedule tasks
@@ -2285,6 +2286,85 @@ def findPeakElement(self, nums):
 - [LeetCode Discuss - A Noob's Guide to the Binary Search Algorithm](https://leetcode.com/discuss/study-guide/1233854/a-noobs-guide-to-the-binary-search-algorithm)
 - [GitHub - Several Coding Patterns for Solving Data Structures and Algorithms Problems during Interviews](https://github.com/Chanda-Abdul/Several-Coding-Patterns-for-Solving-Data-Structures-and-Algorithms-Problems-during-Interviews/blob/main/%E2%9C%85%20%20Pattern%2011%3A%20Modified%20Binary%20Search.md)
 - [USACO Guide - Binary Search (Python)](https://usaco.guide/silver/binary-search?lang=py)
+
+</details>
+
+## Backtracking
+
+<AlgorithmSummary
+  tc={{ latex: "$$\\text{Doesn't affect}$$" }}
+  sc={{ latex: "$$\\text{Improves to linear } - O(n)$$" }}
+/>
+
+> Backtracking is a class of algorithms for finding solutions to some computational problems, notably **constraint satisfaction problems**, that:
+>
+> - **Incrementally builds candidates** to the solutions, and
+> - **Abandons a candidate ("backtracks")** as soon as it determines that the candidate cannot possibly be completed to a valid solution
+
+<div align="right">[Wikipedia](https://en.wikipedia.org/wiki/Backtracking)</div>
+
+#### Types
+
+- Opposite directional
+
+  - <ProblemBadge difficulty="Medium" /> [167. Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
+
+#### When to use
+
+- Etc. like Two sum or container with water variations
+
+<details>
+<summary>
+
+#### Real World usage
+
+</summary>
+
+- **String Manipulation**:
+  - Substring Search:
+
+</details>
+
+<details>
+<summary>
+
+#### Problem examples
+
+</summary>
+
+<br />
+
+<Problem
+  title="167. Two Sum II - Input Array Is Sorted"
+  link="https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description"
+  difficulty="Medium"
+  example={{
+    input: "fruits = [0,1,2,2]",
+    output: "3",
+    explanation: "We can pick from trees [1,2,2]. If we had started at the first tree, we would only pick from trees [0,1]."
+  }}
+>
+
+Description
+
+</Problem>
+
+```py filename="167. Two Sum II - Input Array Is Sorted"
+
+```
+
+<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+
+</details>
+
+<details>
+<summary>
+
+#### Additional materials
+
+</summary>
+
+- [Two Pointers · USACO Guide](https://usaco.guide/silver/two-pointers?lang=cpp)
 
 </details>
 
