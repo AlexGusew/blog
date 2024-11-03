@@ -42,7 +42,7 @@ $\newcommand\computeTime{0.25 \times 10^{-9}\frac{seconds}{operation}}$
 Actual time taken
 
 - How much time it takes for 1 operation computed on $4 \text{ GHz}$ single-core processor $\rightarrow$ $4 \text{ GHz} = 4 \times 10^9 \frac{operations}{second} $ $\rightarrow$ $ \computeTime$
-- If maximum `n = 8` → $8! = 40320$ $\rightarrow 40320 \times \computeTime$ $= 1.008×10^{−5}$ seconds. So, computer will be able to compute it in reasonable time.
+- If maximum `n = 8` $\rightarrow 8! = 40320$ $\rightarrow 40320 \times \computeTime$ $= 1.008×10^{−5}$ seconds. So, computer will be able to compute it in reasonable time.
 - If maximum `n = 100` → $100! = $  number with 158 digits $\rightarrow 100! \times \computeTime$ $\approx$ $3 \times 10^{150}$ **years**. This is $\approx 2.14 \times 10^{140}$ times longer than our universe 🪐 exists!
 
 #### Big O Notation
@@ -294,7 +294,7 @@ class Solution:
 
 Maintain a **dynamic window** that slides through the array or string, adjusting its boundaries as needed to track relevant elements or characters.
 
-Convert **multiple nested loops into single loop**, reducing the time complexity from $O(n²)$ or $O(n³)$ to $O(n)$.
+Convert **multiple nested loops into single loop**, reducing the time complexity from $O(n^2)$ or $O(n^3)$ to $O(n)$.
 
 #### Types
 
@@ -668,8 +668,8 @@ class Solution:
 ```
 
 <ProblemComplexity
-  tc="\(O(n*log(n))\)"
-  sc="\(O(n)\) or \(O(log(n))\) depending on sorting algorithm"
+  tc="\(O(n\times\log n)\)"
+  sc="\(O(n)\) or \(O(\log n)\) depending on sorting algorithm"
 />
 
 ---
@@ -784,7 +784,7 @@ class Solution:
 ```
 
 <ProblemComplexity
-  tc="\(O(n*log(26)) \rightarrow O(n)\)"
+  tc="\(O(n\times\log 26) \rightarrow O(n)\)"
   sc="\(O(26) \rightarrow O(1)\)"
 />
 
@@ -814,7 +814,7 @@ class Solution:
         return len(end_times)
 ```
 
-<ProblemComplexity tc="\(O(n*log(n))\)" sc="\(O(n)\)" />
+<ProblemComplexity tc="\(O(n\times\log n)\)" sc="\(O(n)\)" />
 
 </details>
 
@@ -1113,7 +1113,7 @@ class Solution:
     latex: (
       <ul>
         <li>\(Find\;Min / Max - O(1)\)</li>
-        <li>\(Insert, Remove - O(log(n))\)</li>
+        <li>\(Insert, Remove - O(\log n)\)</li>
         <li>\(Heapify - O(n)\)</li>
       </ul>
     ),
@@ -1145,12 +1145,12 @@ Heap must always comply to **Heap invariant**
 - **Add node**
   1. Add new node to end of heap
   2. Swap the node with parent if it's bigger than parent
-  3. At most, $O(log(n))$ swaps could be made since heap - **Complete binary tree**. In complete binary tree, height = `log(n)`
+  3. At most, $O(\log n)$ swaps could be made since heap - **Complete binary tree**. In complete binary tree, height = $\log n$
 - **Remove node**
   1. Take tree root and remove it from tree
   2. Place last element to root
   3. Swap with children to achieve **Heap invariant**
-  4. At most, $O(log(n))$ swaps could be made
+  4. At most, $O(\log n)$ swaps could be made
 - **Heapify**
   1. Start from last leave
   2. If node doesn't satisfy **Heap invariant**, recursively heapify subtree
@@ -1209,7 +1209,7 @@ Index     0   1   2   3   4
 
   - <ProblemBadge difficulty="Medium" /> [Sort an Array (Problem 912)](https://leetcode.com/problems/sort-an-array/)
 
-- Sort subset of elements resulting to TC optimization from $O(n*log(n))$ to $O(n*log(k))$ where k is heap size
+- Sort subset of elements resulting to TC optimization from $O(n\times\log n)$ to $O(n\times\log k)$ where k is heap size
   - <ProblemBadge difficulty="Medium" /> [Find K Pairs with Smallest Sums (Problem
     373)](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/)
   - <ProblemBadge difficulty="Hard" /> [Merge k Sorted Lists (Problem 23)](https://leetcode.com/problems/merge-k-sorted-lists/)
@@ -1337,7 +1337,7 @@ Here, $m$ is the size of `nums1` and $n$ is the size of `nums2`:
 ## Heap: Two heaps
 
 <AlgorithmSummary
-  tc={{ latex: "$$O(n*log(k))$$" }}
+  tc={{ latex: "$$O(n\timeslog k)$$" }}
   sc={{ latex: "$$O(k)$$" }}
 />
 
@@ -1353,7 +1353,7 @@ It assumes having
 
 #### Algorithm for finding **median** of `k`-size dataset
 
-- **Initialization** - placing elements to heaps by $O(k*log(k))$
+- **Initialization** - placing elements to heaps by $O(k\times\log k)$
   1. Initialize **min heap** and **max heap**
      - **Min heap** will store elements right to the median (bigger)
      - **Max heap** will store elements left to the median (smaller)
@@ -1426,7 +1426,7 @@ class Solution:
         return w
 ```
 
-<ProblemComplexity tc="\(O(n*log(n))\)" sc="\(O(n)\)" />
+<ProblemComplexity tc="\(O(n*\log n)\)" sc="\(O(n)\)" />
 
 ---
 
@@ -1534,7 +1534,7 @@ Two heaps approach is used when median calculation needed
 ## Heap: K-Way Merge
 
 <AlgorithmSummary
-  tc={{ latex: "$$O(n*log(k))$$" }}
+  tc={{ latex: "$$O(n\times log k)$$" }}
   sc={{ latex: "$$O(k)$$" }}
 />
 
@@ -1735,7 +1735,7 @@ class Solution:
 ## Heap: Top K Elements
 
 <AlgorithmSummary
-  tc={{ latex: "$$O(n*log(n))$$" }}
+  tc={{ latex: "$$O(n*\\log n)$$" }}
   sc={{ latex: "$$O(k)$$" }}
 />
 
@@ -1745,7 +1745,7 @@ Maintain a `heap` of size `k` while iterating through the list of elements
 
 #### Time Complexity
 
-Without this pattern, sorting the whole collection is $O(n*log(n))$, plus $O(k)$ to pick **top k** elements. The **top k** pattern achieves $O(n*log(k))$ by selectively tracking compared elements, using a **heap**.
+Without this pattern, sorting the whole collection is $O(n \times \log n)$, plus $O(k)$ to pick **top k** elements. The **top k** pattern achieves $O(n \times \log k)$ by selectively tracking compared elements, using a **heap**.
 
 #### Using Heap
 
@@ -1764,17 +1764,17 @@ A heap is ideal for managing the smallest or largest **k elements**. By using a 
 
 **Time complexity** of Top K approach using heap:
 
-- $O(log(k))$ - insertions and removals
-- $O(n*log(k))$ - processing all elements
-- $O(k*log(k))$ - retrieving all `k` elements, due to reorganization after each removal.
+- $O(\log k)$ - insertions and removals
+- $O(n\times\log k)$ - processing all elements
+- $O(k\times\log k)$ - retrieving all `k` elements, due to reorganization after each removal.
 
 **Time complexity comparison**
 
 **n** - number of all items. **k** - top k elements
 
 - Brute force - $O(n^2)$
-- Sorting - $O(n * log(n))$
-- Heap - $O(n * log(k))$
+- Sorting - $O(n \times \log n)$
+- Heap - $O(n \times \log k)$
 
 #### Typical problems
 
