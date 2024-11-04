@@ -1564,14 +1564,14 @@ Two heaps approach is used when median calculation needed
 
 ## Heap: Top K Elements
 
+The `top k` elements pattern is crucial for efficiently finding a specific number of elements, `k`, from a dataset.
+
+Maintains a `heap` of size `k` while iterating through the list of elements.
+
 <AlgorithmSummary
   tc={{ latex: "$$O(n*\\log n)$$" }}
   sc={{ latex: "$$O(k)$$" }}
 />
-
-The `top k` elements pattern is crucial for efficiently finding a specific number of elements, `k`, from a dataset.
-
-Maintain a `heap` of size `k` while iterating through the list of elements
 
 #### Time Complexity
 
@@ -1602,7 +1602,7 @@ A heap is ideal for managing the smallest or largest **k elements**. By using a 
 
 **n** - number of all items. **k** - top k elements
 
-- Brute force - $O(n^2)$
+- Brute force - $O(n\cdot k)$
 - Sorting - $O(n \cdot \log n)$
 - Heap - $O(n \cdot \log k)$
 
@@ -1783,12 +1783,12 @@ class Solution:
 
 ## Heap: K-Way Merge
 
+The **K-way merge** pattern combines **k** sorted data structures into a single **sorted** output.
+
 <AlgorithmSummary
-  tc={{ latex: "$$O(ncdot log k)$$" }}
+  tc={{ latex: "$$O(n\\cdot \\log k)$$" }}
   sc={{ latex: "$$O(k)$$" }}
 />
-
-The **K-way merge** pattern combines **k** sorted data structures into a single **sorted** output.
 
 It works by repeatedly selecting the smallest (or largest) element from among the first elements of each input list and adding it to the output list, continuing until all elements are merged in order.
 
@@ -1984,16 +1984,16 @@ class Solution:
 
 ## Binary search
 
-<AlgorithmSummary tc={{ latex: "$$O(\\log n)$$" }} sc={{ latex: "$$O(1)$$" }} />
+Searching algorithm in sorted array
 
-**Binary search** - search algorithm in sorted array
+<AlgorithmSummary tc={{ latex: "$$O(\\log n)$$" }} sc={{ latex: "$$O(1)$$" }} />
 
 1. It works by repeatedly **dividing the search interval in half**.
    1. If the target value is **less than** the middle element, the search continues in the left half;
    2. if greater, it continues in the right half.
 2. This process is repeated until the target is found or the interval is empty.
 
-Simple implementation
+#### Simple implementation
 
 ```py filename="Binary search - Iterative"
 def binary_search(arr, target):
@@ -2015,15 +2015,21 @@ def binary_search(arr, target):
 #### Modified Binary search
 
 - Modification of Binary search
+- Uses same core conception of dividing search space by 2
 - Applies specific conditions or transformations to address unique problems:
 
-1. **Binary Search on a Modified Array**: Array is altered
+#### Variants
+
+1. **Binary Search on a Modified Array**
+   - Array is altered
    - <ProblemBadge difficulty="Medium" /> [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
      \- sorted and then rotated.
-2. **Binary Search with Multiple Requirements**: Adapt the **comparison** logic to meet multiple conditions:
+2. **Binary Search with Multiple Requirements**
+   - Adapt the **comparison** logic to meet multiple conditions
    - Finding a range of targets
-   - Identifying the leftmost or rightmost occurrences of a value.
-3. **Finding Conditions**: Identify boundary conditions
+   - Identifying the leftmost or rightmost occurrences of a value
+3. **Finding Conditions**
+   - Identify boundary conditions
    - <ProblemBadge difficulty="Easy" /> [278. First Bad Version](https://leetcode.com/problems/first-bad-version/)
      \- locating the first instance that meets a specific criterion.
 
@@ -2066,7 +2072,7 @@ These modifications allow binary search to efficiently tackle a broader range of
 - There's **no linear data structure**, but data is in **sorted** order
   - <ProblemBadge difficulty="Easy" /> [278. First Bad Version](https://leetcode.com/problems/first-bad-version/)
 
-#### Challenges using B-Search
+#### Challenges using Binary Search
 
 - Identify pattern
 - Find proper condition
@@ -2074,7 +2080,7 @@ These modifications allow binary search to efficiently tackle a broader range of
 
 #### Notes
 
-- Pre-processing might be needed
+- **Pre-processing** might be needed
   - Sort if collection is unsorted
   - Precompute if needed
     - <ProblemBadge difficulty="Medium" /> [162. Find Peak Element](https://leetcode.com/problems/find-peak-element/)
@@ -2307,16 +2313,16 @@ def findPeakElement(self, nums):
 
 **Dynamic programming** is a computer programming technique where an algorithmic problem is first broken down into sub-problems, the results are saved, and then the sub-problems are optimized to find the overall solution.
 
-#### Why use DP?
+#### When to use
 
-- The problem can be divided by subproblems
-- The subproblems are overlapping
+- The problem can be divided by **subproblems**
+- The subproblems are **overlapping**
 
 #### 3 main components:
 
 1. **State** - stores answer for i-th subproblem
 2. **Transition between states** - how to get new solution based on previously calculated
-3. **Base case**
+3. **Base case** - what's initial or the most atomic subproblem
 
 #### Approaches
 
