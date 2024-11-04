@@ -18,8 +18,8 @@ date: "2024-10-28"
 - [Linked List](#linked-list)
 - [Heap: Introduction](#heap-introduction)
 - [Heap: Two heaps](#heap-two-heaps)
-- [Heap: K-Way Merge](#heap-k-way-merge)
 - [Heap: Top K Elements](#heap-top-k-elements)
+- [Heap: K-Way Merge](#heap-k-way-merge)
 - [Binary search](#binary-search)
 - [Dynamic Programming](#dynamic-programming)
 
@@ -29,33 +29,33 @@ date: "2024-10-28"
 
 #### Time Complexity
 
-Indicated **how fast** algorithm computing time grows when input size grows.
+Demonstrates **how fast** the computing time of an algorithm escalates as the size of the input increases.
 
 When solving problems, we can compare algorithm **Time Complexity** to input size and validate if given algorithm fits to input size.
 
-**Example**
-$\newcommand\computeTime{0.25 \times 10^{-9}\frac{seconds}{operation}}$
-
-- $O(n!)$ - Time Complexity
-- $4 \text{ GHz}$ - Processor single-core speed
-
-Actual time taken
-
-- How much time it takes for 1 operation computed on $4 \text{ GHz}$ single-core processor $\rightarrow$ $4 \text{ GHz} = 4 \times 10^9 \frac{operations}{second} $ $\rightarrow$ $ \computeTime$
-- If maximum `n = 8` $\rightarrow 8! = 40320$ $\rightarrow 40320 \times \computeTime$ $= 1.008×10^{−5}$ seconds. So, computer will be able to compute it in reasonable time.
-- If maximum `n = 100` → $100! = $  number with 158 digits $\rightarrow 100! \times \computeTime$ $\approx$ $3 \times 10^{150}$ **years**. This is $\approx 2.14 \times 10^{140}$ times longer than our universe 🪐 exists!
-
 #### Big O Notation
 
-Analyzes asymptotic - answers for fast function grows
+Analyzes **asymptotic** - answers how fast function grows.
 
-Associates problem size `n` with processing time to solve problem `t`
+Associates problem size `n` with processing time to solve problem `t`:
+
+```py
+n - size
+
+6 ┤      *
+  │     *
+4 ┤    *
+  │   *
+2 ┤  *
+  └──┬──┬──┬──┬──┬──┬───
+  0  1  2  3  4  5  6   t - time
+```
 
 #### Best, Worst, and Average Cases
 
-- **Best**: Function performs minimal operations required to solve problem on input of `n` elements
-- **Worst**: Maximum amount of steps required to solve problem on input of `n` elements
-- **Average** Average amount of steps required to solve problem on input of `n` elements
+- **Best**: Function performs **minimal** operations required to solve problem on input of `n` elements
+- **Worst**: Maximum amount of steps
+- **Average** Average amount of steps
 
 > In real-time computing, the **worst-case** execution time is often of particular concern since it is important to know how much time might be needed in the worst case to **guarantee** that the algorithm will always finish on time.
 
@@ -69,27 +69,39 @@ Bogosort creates permutation of input array and checks if it's sorted.
 
 - **Best**: $O_{best}(n)$ - array initially sorted, so it's needed **n** operations to check if each element on right place
 - **Worst**: $O_{worst}(\infty)$ - since bogosort creates random permutation each time, in worst case it will never produce sorted permutation
-- **Average** $O_{avg}(n \times n!)$ - amount of permutations is $n!$
+- **Average** $O_{avg}(n \cdot n!)$ - amount of permutations is $n!$
 
 #### Order of Magnitude
 
-A description of a function in terms of big $ O $ notation typically provides only an upper bound on the growth rate of the function.
+A description of a function in terms of Big $ O $ notation typically provides only an upper bound on the growth rate of the function.
 
 To calculate Order of Magnitude:
 
 - **Discard constants**:
 
-  - $ 3n^2 + 5 \to n^2 $
+  - $ 3n^2 + 2n + 10\log n + 5 \to n^2 + n + \log n $
 
 - **Pick only the most significant function**:
-  - $ n^2 + 2n + 1 \to n^2 $
+  - $ n^2 + n + \log n \to n^2 $
 
 #### Typical Operations with Big O Notation
 
 - **Adding** two functions or complexities
   - $ O(n) + O(m) \to O(n + m)$ $\text{or}\;O(\max(n, m)) $
 - **Multiplying** two functions or complexities
-  - $ O(n) \times O(m) \to O(n \times m) $
+  - $ O(n) \cdot O(m) \to O(n \cdot m) $
+
+**Example**
+$\newcommand\computeTime{0.25 \cdot 10^{-9}\frac{seconds}{operation}}$
+
+- $O(n!)$ - Time Complexity
+- $4 \text{ GHz}$ - Processor single-core speed
+
+Time calculations for `n = 8` and `n = 100`:
+
+- How much time it takes for 1 operation computed on $4 \text{ GHz}$ single-core processor $\rightarrow$ $4 \text{ GHz} = 4 \cdot 10^9 \frac{operations}{second} $ $\rightarrow$ $ \computeTime$
+- If maximum `n = 8` $\rightarrow 8! = 40320$ $\rightarrow 40320 \cdot \computeTime$ $= 1.008×10^{−5}$ seconds. So, computer will be able to compute it in reasonable time.
+- If maximum `n = 100` → $100! = $  number with 158 digits $\rightarrow 100! \cdot \computeTime$ $\approx$ $3 \cdot 10^{150}$ **years**. This is $\approx 2.14 \cdot 10^{140}$ times longer than our universe 🪐 exists!
 
 #### Growth rate comparison
 
@@ -99,6 +111,18 @@ To calculate Order of Magnitude:
   height="404"
   alt="Trapping Rain Water example"
 />
+
+#### Space Complexity
+
+Space complexity measures the **memory** required by an algorithm as a function of the input size
+
+Common Space Complexities:
+
+- $ O(1) $ - constant space
+- $ O(n) $ - linear space, and
+- $ O(n^2) $ - quadratic space.
+
+Optimizing Space complexity can lead to more efficient algorithms, especially in **large-scale** data processing.
 
 <details>
 <summary>
@@ -112,25 +136,13 @@ To calculate Order of Magnitude:
 
 </details>
 
-#### Space Complexity
-
-Space complexity measures the memory required by an algorithm as a function of the input size
-
-In Big $ O $ notation, common space complexities include:
-
-- $ O(1) $ for constant space
-- $ O(n) $ for linear space, and
-- $ O(n^2) $ for quadratic space.
-
-Optimizing Space complexity can lead to more efficient algorithms, especially in **large-scale** data processing.
-
 ## Two pointers
-
-<AlgorithmSummary tc={{ latex: "$$O(n)$$" }} sc={{ latex: "$$O(1)$$" }} />
 
 Iterating two pointers across an array to search for a pair of indices satisfying some condition in linear time.
 
-#### Types
+<AlgorithmSummary tc={{ latex: "$$O(n)$$" }} sc={{ latex: "$$O(1)$$" }} />
+
+#### Variants
 
 - Opposite directional
 
@@ -294,21 +306,20 @@ class Solution:
 
 Maintain a **dynamic window** that slides through the array or string, adjusting its boundaries as needed to track relevant elements or characters.
 
-Convert **multiple nested loops into single loop**, reducing the time complexity from $O(n^2)$ or $O(n^3)$ to $O(n)$.
+Sliding window converts **multiple nested loops into single loop**, reducing the time complexity from $O(n^2)$ or $O(n^3)$ to $O(n)$.
 
-#### Types
+#### Variants
 
 - **Fixed window size**
   - <ProblemBadge difficulty="Medium" /> [2461. Maximum Sum of Distinct Subarrays
     With Length K](https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/description/)
 - **Variable window size**
-  - Approach:
-    - **Initialize window indices**: Start with `start` and `end` pointers at the first element.
-    - **Expand the window**: Increment the `end` pointer to expand the window if conditions are met.
-    - **Process the window**: Perform required operations when the window meets criteria.
-    - **Adjust the window size**: Move the `start` pointer to adjust size and meet desired criteria.
+  1. **Initialize window indices**: Start with `start` and `end` pointers at the first element.
+  1. **Expand the window**: Increment the `end` pointer to expand the window if conditions are met.
+  1. **Process the window**: Perform required operations when the window meets criteria.
+  1. **Adjust the window size**: Move the `start` pointer to adjust size and meet desired criteria.
   - <ProblemBadge difficulty="Medium" /> [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/description/)
-- **Growing window**:
+- **Growing window**
   - <ProblemBadge difficulty="Medium" /> [3. Longest Substring Without Repeating
     Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/)
   - <ProblemBadge difficulty="Medium" /> [904. Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/description/)
@@ -318,8 +329,8 @@ Convert **multiple nested loops into single loop**, reducing the time complexity
 
 #### When to use
 
-- **Contiguous** data: array, linked list, string, or stream
-- Processing subsets of elements: The problem requires repeated computations on a **contiguous subset** of data elements (a subarray or a substring) of **fixed** or **variable** length
+- **Contiguous data**: array, linked list, string, or stream
+- **Processing subsets of elements**: The problem requires repeated computations on a **contiguous subset** of data elements (a subarray or a substring) of **fixed** or **variable** length
 - Find longest, shortest or target values of a sequence
 
 #### Problem patterns
@@ -402,9 +413,7 @@ You want to collect as much fruit as possible. However, the owner has some stric
   alt="Fruit Into Baskets Example"
 />
 
-Let's compare **Brute Force** approach with **Sliding window**.
-
-In second approach, we **converted two nested loops into a single loop** thus improving Time Complexity from $O(n^2)$ to $O(n)$:
+Let's compare **Brute Force** approach with **Sliding window**:
 
 ```py filename="904. Fruit Into Baskets. Brute Force approach"
 class Solution:
@@ -427,7 +436,7 @@ class Solution:
 
 <ProblemComplexity tc="\(O(n^2)\)" sc="\(O(1)\)" />
 
----
+In second approach, **two nested loops converted into a single loop** thus improving **Time Complexity** from $O(n^2)$ to $O(n)$:
 
 ```py filename="904. Fruit Into Baskets. Sliding window approach"
 class Solution:
@@ -586,11 +595,12 @@ class Solution:
 
 ## Intervals
 
+Performing operations on set of intervals. Typical interval problem deals with **array of overlapping intervals** e.g. `[[1,
+3], [3, 5]]`.
+
 <AlgorithmSummary tc={{ latex: "$$O(n)$$" }} sc={{ latex: "$$O(1)$$" }} />
 
-Typical interval problem deals with **array of overlapping intervals** e.g. `[[1, 3], [3, 5]]`
-
-Common tasks with intervals:
+#### Common tasks with intervals
 
 - Merging intersecting intervals
   - <ProblemBadge difficulty="Medium" /> [56. Merge Intervals](https://leetcode.com/problems/merge-intervals/description/)
@@ -668,7 +678,7 @@ class Solution:
 ```
 
 <ProblemComplexity
-  tc="\(O(n\times\log n)\)"
+  tc="\(O(n\cdot\log n)\)"
   sc="\(O(n)\) or \(O(\log n)\) depending on sorting algorithm"
 />
 
@@ -784,7 +794,7 @@ class Solution:
 ```
 
 <ProblemComplexity
-  tc="\(O(n\times\log 26) \rightarrow O(n)\)"
+  tc="\(O(n\cdot\log 26) \rightarrow O(n)\)"
   sc="\(O(26) \rightarrow O(1)\)"
 />
 
@@ -814,7 +824,7 @@ class Solution:
         return len(end_times)
 ```
 
-<ProblemComplexity tc="\(O(n\times\log n)\)" sc="\(O(n)\)" />
+<ProblemComplexity tc="\(O(n\cdot\log n)\)" sc="\(O(n)\)" />
 
 </details>
 
@@ -832,6 +842,8 @@ class Solution:
 
 ## Linked List
 
+This section focuses on **in-place** operations with Linked Lists.
+
 <AlgorithmSummary
   tc={{
     latex: (
@@ -844,20 +856,40 @@ class Solution:
   sc={{ latex: "$$O(1)$$" }}
 />
 
-This section focuses on **in-place** operations with Linked Lists.
-
 #### Properties
 
 - Sequential data structure (like array, unlike tree)
 - Slow access, but fast add / delete operations
 
-#### Types
+#### Variants
 
 - Singly-linked list
+
+```py
+┌─────┐     ┌─────┐     ┌─────┐
+│  A  ┼────►│  B  ┼────►│  C  ┼────x
+└─────┘     └─────┘     └─────┘
+```
+
 - Doubly-linked list
+
+```py
+     ┌─────┐     ┌─────┐     ┌─────┐
+x────┼  A  │◄───►│  B  │◄───►│  C  ┼────x
+     └─────┘     └─────┘     └─────┘
+```
+
 - Circular-linked list
 
-#### Example of Linked List
+```py
+┌─────┐     ┌─────┐     ┌─────┐
+│  A  ┼────►│  B  ┼────►│  C  │
+└─────┘     └─────┘     └─────┘
+   ▲                       │
+   └───────────────────────┘
+```
+
+#### Example of Singly-linked List
 
 ```py filename="Typical ListNode in LeetCode"
 class ListNode:
@@ -1108,6 +1140,8 @@ class Solution:
 
 ## Heap: Introduction
 
+Heap is a **complete binary tree** where each node is smaller than its children (for min heap). This property is called **Heap invariant**, heap must always comply to it.
+
 <AlgorithmSummary
   tc={{
     latex: (
@@ -1121,21 +1155,17 @@ class Solution:
   sc={{ latex: "$$O(1)$$" }}
 />
 
-Heap is a **complete binary tree** where each node is smaller than its children (for min heap). This property is called **Heap invariant**.
-
-Heap must always comply to **Heap invariant**
-
 #### Priority Queue vs Heap
 
 - Priority queue
   - Abstract data structure (like stack or queue) that behaves like queue (First In, First Out)
+  - Each element has **priority** - the higher propriety element comes first
   - Specifies behavior of data structure
   - Doesn't define internal implementation
-  - Each element has **priority** - the higher propriety element comes first
 - Heap
-  - Implementation of Priority queue
+  - Implements of Priority queue
 
-#### Types
+#### Variants
 
 - **Min heap** - each parent node **smaller of equal** to its children
 - **Max heap** - each parent node **bigger or equal** to its children
@@ -1165,26 +1195,27 @@ Heap usually represented as array:
 - Node<sub>i</sub> left and right children could be found by index `2 * i` and `2 * i + 1`
 - It's convenient to store nodes starting from index `1`
 
-#### Example
-
-- Max heap
-- Complete binary tree with height of 2
+#### Example or Max heap
 
 **Tree** representation:
 
 ```py
+Complete binary tree of height 2
+
 Level             Tree
 
   0:                9
                   /   \
   1:             7     8
                 /
-  2:           5
+  2:           5 - all levels are filled except for last layer
 ```
 
 **Array** representation with indices:
 
 ```py
+          0 index is blank because 0 * 2 = 0
+          ↓
         ┌───┬───┬───┬───┬───┐
 Value   │ - │ 9 │ 7 │ 8 │ 5 │
         └───┴───┴───┴───┴───┘
@@ -1209,7 +1240,7 @@ Index     0   1   2   3   4
 
   - <ProblemBadge difficulty="Medium" /> [Sort an Array (Problem 912)](https://leetcode.com/problems/sort-an-array/)
 
-- Sort subset of elements resulting to TC optimization from $O(n\times\log n)$ to $O(n\times\log k)$ where k is heap size
+- Sort subset of elements resulting to TC optimization from $O(n\cdot\log n)$ to $O(n\cdot\log k)$ where k is heap size
   - <ProblemBadge difficulty="Medium" /> [Find K Pairs with Smallest Sums (Problem
     373)](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/)
   - <ProblemBadge difficulty="Hard" /> [Merge k Sorted Lists (Problem 23)](https://leetcode.com/problems/merge-k-sorted-lists/)
@@ -1336,12 +1367,12 @@ Here, $m$ is the size of `nums1` and $n$ is the size of `nums2`:
 
 ## Heap: Two heaps
 
+Two heaps approach used to find out **middle of moving dataset**
+
 <AlgorithmSummary
-  tc={{ latex: "$$O(n\timeslog k)$$" }}
+  tc={{ latex: "$$O(n\\cdot\\log k)$$" }}
   sc={{ latex: "$$O(k)$$" }}
 />
-
-Two heaps approach used to find out middle of moving dataset
 
 - <ProblemBadge difficulty="Hard" /> [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/description/)
 - <ProblemBadge difficulty="Hard" /> [480. Sliding Window Median](https://leetcode.com/problems/sliding-window-median/description/)
@@ -1353,7 +1384,7 @@ It assumes having
 
 #### Algorithm for finding **median** of `k`-size dataset
 
-- **Initialization** - placing elements to heaps by $O(k\times\log k)$
+- **Initialization** - placing elements to heaps by $O(k\cdot\log k)$
   1. Initialize **min heap** and **max heap**
      - **Min heap** will store elements right to the median (bigger)
      - **Max heap** will store elements left to the median (smaller)
@@ -1531,10 +1562,229 @@ Two heaps approach is used when median calculation needed
 
 </details>
 
+## Heap: Top K Elements
+
+<AlgorithmSummary
+  tc={{ latex: "$$O(n*\\log n)$$" }}
+  sc={{ latex: "$$O(k)$$" }}
+/>
+
+The `top k` elements pattern is crucial for efficiently finding a specific number of elements, `k`, from a dataset.
+
+Maintain a `heap` of size `k` while iterating through the list of elements
+
+#### Time Complexity
+
+Without this pattern, sorting the whole collection is $O(n \cdot \log n)$, plus $O(k)$ to pick **top k** elements. The **top k** pattern achieves $O(n \cdot \log k)$ by selectively tracking compared elements, using a **heap**.
+
+#### Using Heap
+
+A heap is ideal for managing the smallest or largest **k elements**. By using a max heap for smallest elements and a min heap for largest, we can maintain ordered elements with quick access to the smallest or largest.
+
+#### Operating Procedure
+
+1. Insert first k elements into the appropriate heap.
+   - Min heap for largest elements.
+   - Max heap for smallest elements.
+2. For remaining elements:
+   - In min heap (for largest elements), replace the smallest (top) with any found larger element.
+   - In max heap (for smallest elements), replace the largest (top) with any found smaller element.
+
+#### Efficiency
+
+**Time complexity** of Top K approach using heap:
+
+- $O(\log k)$ - insertions and removals
+- $O(n\cdot\log k)$ - processing all elements
+- $O(k\cdot\log k)$ - retrieving all `k` elements, due to reorganization after each removal.
+
+**Time complexity comparison**
+
+**n** - number of all items. **k** - top k elements
+
+- Brute force - $O(n^2)$
+- Sorting - $O(n \cdot \log n)$
+- Heap - $O(n \cdot \log k)$
+
+#### Typical problems
+
+- <ProblemBadge difficulty="Easy" /> [703. Kth Largest Element in a Stream](https://leetcode.com/problems/kth-largest-element-in-a-stream/description/)
+- <ProblemBadge difficulty="Medium" /> [767. Reorganize String](https://leetcode.com/problems/reorganize-string/description/)
+- <ProblemBadge difficulty="Medium" /> [973. K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/description/)
+
+#### When to use
+
+- **Unsorted List Analysis**: Task involves extracting a specific subset (largest, smallest, most/least frequent) from an unsorted list, either as the final goal or an intermediate step.
+- **Identifying a Specific Subset**: To identify a subset based on criteria like **top k**, <code>k<sub>th</sub> largest/smallest</code>, or **k most frequent**, indicating the top k elements pattern is a fit.
+
+#### How to identify Top K pattern
+
+- Top k element
+- Smallest / Biggest element
+- Most / Least frequent k elements
+- Furthest / Nearest
+- Given Unsorted data
+
+#### Pitfalls
+
+- Sometimes mathematical approach faster
+- Sometimes other patterns faster: [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/description/)
+  - [Quickselect](https://en.wikipedia.org/wiki/Quickselect) - Average Time Complexity $O(n)$
+  - Heap - Average Time Complexity $O(n \cdot \log k)$
+- If data is sorted, use **binary search** or others
+- If need to find one extremum, heap is not needed
+
+<details>
+<summary>
+
+#### Problem examples
+
+</summary>
+
+<br />
+
+<Problem
+  title="347. Top K Frequent Elements"
+  link="https://leetcode.com/problems/top-k-frequent-elements/description/"
+  difficulty="Medium"
+  example={{
+    input: "nums = [1,1,1,2,2,3], k = 2",
+    output: "[1,2]"
+  }}
+>
+
+Given an integer array `nums` and an integer `k`, return the `k` most frequent elements. You may return the answer in any order.
+
+</Problem>
+
+```py filename="347. Top K Frequent Elements"
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        heap = []
+        for num, freq in Counter(nums).items():
+            heapq.heappush(heap, (freq, num))
+            if len(heap) > k:
+                heapq.heappop(heap)
+        return [num for freq, num in heap]
+```
+
+<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(n + k)\)" />
+
+---
+
+<Problem
+  title="767. Reorganize String"
+  link="https://leetcode.com/problems/reorganize-string/description/"
+  difficulty="Medium"
+  example={{
+    input: "s = \"aab\"",
+    output: "\"aba\""
+  }}
+>
+
+Given a string `s`, rearrange the characters of `s` so that any two adjacent characters are not the same.
+
+Return any possible rearrangement of `s` or return `""` if not possible.
+
+</Problem>
+
+```py filename="767. Reorganize String"
+class Solution:
+    def reorganizeString(self, s: str) -> str:
+        ans = []
+        pq = [(-count, char) for char, count in Counter(s).items()]
+        heapify(pq)
+
+        while pq:
+            count_first, char_first = heappop(pq)
+            if not ans or char_first != ans[-1]:
+                ans.append(char_first)
+                if count_first + 1 != 0:
+                    heappush(pq, (count_first + 1, char_first))
+            else:
+                if not pq: return ''
+                count_second, char_second = heappop(pq)
+                ans.append(char_second)
+                if count_second + 1 != 0:
+                    heappush(pq, (count_second + 1, char_second))
+                heappush(pq, (count_first, char_first))
+
+        return ''.join(ans)
+```
+
+<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(k)\)" />
+
+---
+
+<Problem
+  title="973. K Closest Points to Origin"
+  link="https://leetcode.com/problems/k-closest-points-to-origin/description/"
+  difficulty="Medium"
+  example={{
+    input: "points = [[1,3],[-2,2]], k = 1",
+    output: "[[-2,2]]",
+    explanation: `
+    explanation: "The distance between (1, 3) and the origin is sqrt(10).
+The distance between (-2, 2) and the origin is sqrt(8).
+Since sqrt(8) < sqrt(10), (-2, 2) is closer to the origin.
+We only want the closest k = 1 points from the origin, so the answer is just [[-2,2]].
+    `
+  }}
+>
+
+Given an array of points where <code>points[i] = [x<sub>i</sub>, y<sub>i</sub>]</code> represents a point on the **X-Y** plane and an integer `k`, return the `k` closest points to the origin `(0, 0)`.
+
+The distance between two points on the **X-Y** plane is the Euclidean distance (i.e., `√(x1 - x2)2 + (y1 - y2)2)`.
+
+You may return the answer in any order. The answer is guaranteed to be unique (except for the order that it is in).
+
+<Image
+  src="/algorithms-cheatsheet/973.jpg"
+  width="718"
+  height="404"
+  alt="K Closest Points to Origin example"
+/>
+
+</Problem>
+
+```py filename="973. K Closest Points to Origin"
+class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        dist_idx_heap = []
+        for i, (x, y) in enumerate(points):
+            dist = sqrt(x**2 + y**2)
+            heapq.heappush(dist_idx_heap, (-dist, i))
+            if len(dist_idx_heap) > k:
+                heapq.heappop(dist_idx_heap)
+        res = []
+        for dist, i in dist_idx_heap:
+            res.append(points[i])
+        return res
+```
+
+<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(k)\)" />
+
+</details>
+
+<details>
+<summary>
+
+#### Real World usage
+
+</summary>
+
+- **Ride-sharing Apps**: Efficiently finding the nearest drivers for a user in apps like Uber, prioritizing the **closest n drivers** without needing to evaluate all city drivers.
+
+- **Financial Markets**: Highlighting top brokers based on transaction volumes or success metrics, sifting through data to spotlight leaders in market activities.
+
+- **Social Media**: Filtering top trending topics by frequency, using the top K elements pattern to analyze hashtags or keywords for content relevancy.
+
+</details>
+
 ## Heap: K-Way Merge
 
 <AlgorithmSummary
-  tc={{ latex: "$$O(n\times log k)$$" }}
+  tc={{ latex: "$$O(ncdot log k)$$" }}
   sc={{ latex: "$$O(k)$$" }}
 />
 
@@ -1729,225 +1979,6 @@ class Solution:
 - **Financial Transaction Merging**: For financial institutions, merging transactions from different sources into a single stream is essential for analysis or fraud detection. K-way merge organizes these transactions coherently, improving financial monitoring and analysis.
 
 - **Log File Analysis**: Web services generate logs from multiple servers. Merging these into one stream for analysis requires the K-way merge, making it easier to analyze user behavior or system performance with minimal preprocessing.
-
-</details>
-
-## Heap: Top K Elements
-
-<AlgorithmSummary
-  tc={{ latex: "$$O(n*\\log n)$$" }}
-  sc={{ latex: "$$O(k)$$" }}
-/>
-
-The `top k` elements pattern is crucial for efficiently finding a specific number of elements, `k`, from a dataset.
-
-Maintain a `heap` of size `k` while iterating through the list of elements
-
-#### Time Complexity
-
-Without this pattern, sorting the whole collection is $O(n \times \log n)$, plus $O(k)$ to pick **top k** elements. The **top k** pattern achieves $O(n \times \log k)$ by selectively tracking compared elements, using a **heap**.
-
-#### Using Heap
-
-A heap is ideal for managing the smallest or largest **k elements**. By using a max heap for smallest elements and a min heap for largest, we can maintain ordered elements with quick access to the smallest or largest.
-
-#### Operating Procedure
-
-1. Insert first k elements into the appropriate heap.
-   - Min heap for largest elements.
-   - Max heap for smallest elements.
-2. For remaining elements:
-   - In min heap (for largest elements), replace the smallest (top) with any found larger element.
-   - In max heap (for smallest elements), replace the largest (top) with any found smaller element.
-
-#### Efficiency
-
-**Time complexity** of Top K approach using heap:
-
-- $O(\log k)$ - insertions and removals
-- $O(n\times\log k)$ - processing all elements
-- $O(k\times\log k)$ - retrieving all `k` elements, due to reorganization after each removal.
-
-**Time complexity comparison**
-
-**n** - number of all items. **k** - top k elements
-
-- Brute force - $O(n^2)$
-- Sorting - $O(n \times \log n)$
-- Heap - $O(n \times \log k)$
-
-#### Typical problems
-
-- <ProblemBadge difficulty="Easy" /> [703. Kth Largest Element in a Stream](https://leetcode.com/problems/kth-largest-element-in-a-stream/description/)
-- <ProblemBadge difficulty="Medium" /> [767. Reorganize String](https://leetcode.com/problems/reorganize-string/description/)
-- <ProblemBadge difficulty="Medium" /> [973. K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/description/)
-
-#### When to use
-
-- **Unsorted List Analysis**: Task involves extracting a specific subset (largest, smallest, most/least frequent) from an unsorted list, either as the final goal or an intermediate step.
-- **Identifying a Specific Subset**: To identify a subset based on criteria like **top k**, <code>k<sub>th</sub> largest/smallest</code>, or **k most frequent**, indicating the top k elements pattern is a fit.
-
-#### How to identify Top K pattern
-
-- Top k element
-- Smallest / Biggest element
-- Most / Least frequent k elements
-- Furthest / Nearest
-- Given Unsorted data
-
-#### Pitfalls
-
-- Sometimes mathematical approach faster
-- Sometimes other patterns faster: [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/description/)
-  - [Quickselect](https://en.wikipedia.org/wiki/Quickselect) - Average Time Complexity $O(n)$
-  - Heap - Average Time Complexity $O(n \times \log k)$
-- If data is sorted, use **binary search** or others
-- If need to find one extremum, heap is not needed
-
-<details>
-<summary>
-
-#### Problem examples
-
-</summary>
-
-<br />
-
-<Problem
-  title="347. Top K Frequent Elements"
-  link="https://leetcode.com/problems/top-k-frequent-elements/description/"
-  difficulty="Medium"
-  example={{
-    input: "nums = [1,1,1,2,2,3], k = 2",
-    output: "[1,2]"
-  }}
->
-
-Given an integer array `nums` and an integer `k`, return the `k` most frequent elements. You may return the answer in any order.
-
-</Problem>
-
-```py filename="347. Top K Frequent Elements"
-class Solution:
-    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        heap = []
-        for num, freq in Counter(nums).items():
-            heapq.heappush(heap, (freq, num))
-            if len(heap) > k:
-                heapq.heappop(heap)
-        return [num for freq, num in heap]
-```
-
-<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(n + k)\)" />
-
----
-
-<Problem
-  title="767. Reorganize String"
-  link="https://leetcode.com/problems/reorganize-string/description/"
-  difficulty="Medium"
-  example={{
-    input: "s = \"aab\"",
-    output: "\"aba\""
-  }}
->
-
-Given a string `s`, rearrange the characters of `s` so that any two adjacent characters are not the same.
-
-Return any possible rearrangement of `s` or return `""` if not possible.
-
-</Problem>
-
-```py filename="767. Reorganize String"
-class Solution:
-    def reorganizeString(self, s: str) -> str:
-        ans = []
-        pq = [(-count, char) for char, count in Counter(s).items()]
-        heapify(pq)
-
-        while pq:
-            count_first, char_first = heappop(pq)
-            if not ans or char_first != ans[-1]:
-                ans.append(char_first)
-                if count_first + 1 != 0:
-                    heappush(pq, (count_first + 1, char_first))
-            else:
-                if not pq: return ''
-                count_second, char_second = heappop(pq)
-                ans.append(char_second)
-                if count_second + 1 != 0:
-                    heappush(pq, (count_second + 1, char_second))
-                heappush(pq, (count_first, char_first))
-
-        return ''.join(ans)
-```
-
-<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(k)\)" />
-
----
-
-<Problem
-  title="973. K Closest Points to Origin"
-  link="https://leetcode.com/problems/k-closest-points-to-origin/description/"
-  difficulty="Medium"
-  example={{
-    input: "points = [[1,3],[-2,2]], k = 1",
-    output: "[[-2,2]]",
-    explanation: `
-    explanation: "The distance between (1, 3) and the origin is sqrt(10).
-The distance between (-2, 2) and the origin is sqrt(8).
-Since sqrt(8) < sqrt(10), (-2, 2) is closer to the origin.
-We only want the closest k = 1 points from the origin, so the answer is just [[-2,2]].
-    `
-  }}
->
-
-Given an array of points where <code>points[i] = [x<sub>i</sub>, y<sub>i</sub>]</code> represents a point on the **X-Y** plane and an integer `k`, return the `k` closest points to the origin `(0, 0)`.
-
-The distance between two points on the **X-Y** plane is the Euclidean distance (i.e., `√(x1 - x2)2 + (y1 - y2)2)`.
-
-You may return the answer in any order. The answer is guaranteed to be unique (except for the order that it is in).
-
-<Image
-  src="/algorithms-cheatsheet/973.jpg"
-  width="718"
-  height="404"
-  alt="K Closest Points to Origin example"
-/>
-
-</Problem>
-
-```py filename="973. K Closest Points to Origin"
-class Solution:
-    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-        dist_idx_heap = []
-        for i, (x, y) in enumerate(points):
-            dist = sqrt(x**2 + y**2)
-            heapq.heappush(dist_idx_heap, (-dist, i))
-            if len(dist_idx_heap) > k:
-                heapq.heappop(dist_idx_heap)
-        res = []
-        for dist, i in dist_idx_heap:
-            res.append(points[i])
-        return res
-```
-
-<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(k)\)" />
-
-</details>
-
-<details>
-<summary>
-
-#### Real World usage
-
-</summary>
-
-- **Ride-sharing Apps**: Efficiently finding the nearest drivers for a user in apps like Uber, prioritizing the **closest n drivers** without needing to evaluate all city drivers.
-
-- **Financial Markets**: Highlighting top brokers based on transaction volumes or success metrics, sifting through data to spotlight leaders in market activities.
-
-- **Social Media**: Filtering top trending topics by frequency, using the top K elements pattern to analyze hashtags or keywords for content relevancy.
 
 </details>
 
