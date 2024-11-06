@@ -40,10 +40,10 @@ export default function SubscribeFeatured() {
   };
 
   return (
-    <div className="max-sm:rounded-none max-sm:-mx-4 my-12 bg-black text-white dark:bg-white dark:text-black rounded-xl overflow-hidden max-sm:m-4 ms:my:4">
+    <div className="mt-24 max-sm:rounded-none max-sm:-mx-4 my-12 bg-black text-white dark:bg-zinc-100 dark:text-black rounded-xl overflow-hidden ms:my:4">
       <div className="p-14 flex items-center justify-center min-h-[400px] max-sm:p-6">
         <div className="max-w-md w-full">
-          <h2 className="text-5xl font-bold text-center mt-0 text-white mb-10 max-sm:text-4xl">
+          <h2 className="text-5xl font-bold text-center mt-0 text-white dark:text-black mb-10 max-sm:text-4xl">
             Get notified when DSA cheatsheet is launched 🚀
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4" ref={formRef}>
@@ -52,20 +52,21 @@ export default function SubscribeFeatured() {
               name="name"
               placeholder="Your Name"
               required
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/70 dark:bg-black/10 dark:border-black/20 dark:text-black dark:placeholder:text-black/70"
+              className="bg-white/10 border-white/20 text-white placeholder:text-white/70 dark:border-black/20 dark:text-black dark:placeholder:text-black/70"
             />
             <Input
               type="email"
               name="email"
               placeholder="Your Email"
               required
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/70 dark:bg-black/10 dark:border-black/20 dark:text-black dark:placeholder:text-black/70"
+              className="bg-white/10 border-white/20 text-white placeholder:text-white/70 dark:border-black/20 dark:text-black dark:placeholder:text-black/70"
             />
             <Button
               type="submit"
               variant="outline"
               disabled={isLoading}
-              className="w-full bg-white text-black hover:bg-white/90 dark:bg-black dark:text-white dark:hover:bg-black/90"
+              size={"lg"}
+              className="w-full bg-white text-black hover:bg-white/90 dark:bg-black dark:text-white dark:hover:bg-black/90 h-11"
             >
               {isLoading ? "Subscribing..." : "Notify Me"}
             </Button>
