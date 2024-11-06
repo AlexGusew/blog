@@ -40,11 +40,11 @@ export default function SubscribeFeatured() {
   };
 
   return (
-    <div className="my-12 bg-black text-white dark:bg-white dark:text-black rounded-xl overflow-hidden max-sm:m-4 ms:my:4">
+    <div className="max-sm:rounded-none max-sm:-mx-4 my-12 bg-black text-white dark:bg-white dark:text-black rounded-xl overflow-hidden max-sm:m-4 ms:my:4">
       <div className="p-14 flex items-center justify-center min-h-[400px] max-sm:p-6">
         <div className="max-w-md w-full">
           <h2 className="text-5xl font-bold text-center mt-0 text-white mb-10 max-sm:text-4xl">
-            Get notified when cheatsheet is launched
+            Get notified when DSA cheatsheet is launched 🚀
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4" ref={formRef}>
             <Input
