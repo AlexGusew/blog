@@ -1,48 +1,42 @@
 "use client";
 
-import { useFormStatus } from "react-dom";
-import { useRef } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
-import { subscribeUser } from "@/app/actions";
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <Button
-      type="submit"
-      variant="outline"
-      disabled={pending}
-      className="w-full bg-white text-black hover:bg-white/90 dark:bg-black dark:text-white dark:hover:bg-black/90"
-    >
-      {pending ? "Subscribing..." : "Notify Me"}
-    </Button>
-  );
-}
+import { useToast } from "@/hooks/use-toast";
 
 export default function SubscribeFeatured() {
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  const formRef = useRef<HTMLFormElement>(null);
 
-  async function clientAction(formData: FormData) {
-    const result = await subscribeUser(formData);
-    if (result.success) {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsLoading(true);
+
+    const formData = new FormData(event.currentTarget);
+    const response = await fetch("/api/subscribe", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
       toast({
         title: "Subscription Confirmed!",
-        description: `Thanks ${result.name}! We'll notify you when the cheatsheet is ready.`,
+        description: `Thanks ${data.name}! We'll notify you when the cheatsheet is ready.`,
       });
-      formRef.current?.reset();
+      event.currentTarget.reset();
     } else {
       toast({
         title: "Error",
-        description:
-          result.message || "Something went wrong. Please try again.",
+        description: data.message || "Something went wrong. Please try again.",
         variant: "destructive",
       });
     }
-  }
+
+    setIsLoading(false);
+  };
 
   return (
     <div className="my-12 bg-black text-white dark:bg-white dark:text-black rounded-xl overflow-hidden">
@@ -53,7 +47,7 @@ export default function SubscribeFeatured() {
             Get notified when our comprehensive cheatsheet is complete. Be the
             first to access this valuable resource!
           </p>
-          <form action={clientAction} ref={formRef} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <Input
               type="text"
               name="name"
@@ -68,7 +62,14 @@ export default function SubscribeFeatured() {
               required
               className="bg-white/10 border-white/20 text-white placeholder:text-white/70 dark:bg-black/10 dark:border-black/20 dark:text-black dark:placeholder:text-black/70"
             />
-            <SubmitButton />
+            <Button
+              type="submit"
+              variant="outline"
+              disabled={isLoading}
+              className="w-full bg-white text-black hover:bg-white/90 dark:bg-black dark:text-white dark:hover:bg-black/90"
+            >
+              {isLoading ? "Subscribing..." : "Notify Me"}
+            </Button>
           </form>
         </div>
       </div>
