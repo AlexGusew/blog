@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 export default function SubscribeFeatured() {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -26,7 +27,7 @@ export default function SubscribeFeatured() {
         title: "Subscription Confirmed!",
         description: `Thanks ${data.name}! We'll notify you when the cheatsheet is ready.`,
       });
-      event.currentTarget.reset();
+      formRef.current?.reset();
     } else {
       toast({
         title: "Error",
@@ -39,15 +40,13 @@ export default function SubscribeFeatured() {
   };
 
   return (
-    <div className="my-12 bg-black text-white dark:bg-white dark:text-black rounded-xl overflow-hidden">
-      <div className="p-8 flex items-center justify-center min-h-[400px]">
+    <div className="my-12 bg-black text-white dark:bg-white dark:text-black rounded-xl overflow-hidden max-sm:m-4 ms:my:4">
+      <div className="p-14 flex items-center justify-center min-h-[400px] max-sm:p-6">
         <div className="max-w-md w-full">
-          <h2 className="text-3xl font-bold mb-2 text-center">Stay Informed</h2>
-          <p className="text-lg mb-6 text-center">
-            Get notified when our comprehensive cheatsheet is complete. Be the
-            first to access this valuable resource!
-          </p>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <h2 className="text-5xl font-bold text-center mt-0 text-white mb-10 max-sm:text-4xl">
+            Get notified when cheatsheet is launched
+          </h2>
+          <form onSubmit={handleSubmit} className="space-y-4" ref={formRef}>
             <Input
               type="text"
               name="name"

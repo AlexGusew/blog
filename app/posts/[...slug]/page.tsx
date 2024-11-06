@@ -5,7 +5,7 @@ import "highlight.js/styles/atom-one-dark.css";
 import { Metadata } from "next";
 import { Mdx } from "@/components/mdx-components";
 import { Difficulty } from "@/components/ui/difficulty";
-// import SubscribeFeatured from "@/components/subscribe";
+import SubscribeFeatured from "@/components/subscribe";
 
 interface PostProps {
   params: {
@@ -73,7 +73,7 @@ export default async function PostPage({ params }: PostProps) {
         </p>
       )}
       <Mdx code={post.body.code} />
-      {/* <SubscribeFeatured /> */}
+      <SubscribeFeatured />
     </article>
   );
 }
