@@ -868,23 +868,23 @@ This section focuses on **in-place** operations with Linked Lists.
 
 ```py
 ┌─────┐     ┌─────┐     ┌─────┐
-│  A  ┼────►│  B  ┼────►│  C  ┼────x
+│  A  ├────►│  B  ├────►│  C  ├────►null
 └─────┘     └─────┘     └─────┘
 ```
 
 - Doubly-linked list
 
 ```py
-     ┌─────┐     ┌─────┐     ┌─────┐
-x────┼  A  │◄───►│  B  │◄───►│  C  ┼────x
-     └─────┘     └─────┘     └─────┘
+         ┌─────┐     ┌─────┐     ┌─────┐
+null◄────┤  A  │◄───►│  B  │◄───►│  C  ├────►null
+         └─────┘     └─────┘     └─────┘
 ```
 
 - Circular-linked list
 
 ```py
 ┌─────┐     ┌─────┐     ┌─────┐
-│  A  ┼────►│  B  ┼────►│  C  │
+│  A  ├────►│  B  ├────►│  C  │
 └─────┘     └─────┘     └─────┘
    ▲                       │
    └───────────────────────┘
@@ -906,7 +906,7 @@ first_node.next = second_node
 
 ```py
 ┌─────┐    ┌─────┐
-│  1  ┼───►│  2  ┼───x
+│  1  ├───►│  2  ├───►null
 └─────┘    └─────┘
 ```
 
@@ -914,7 +914,7 @@ first_node.next = second_node
 
 If operation is going to be performed on head or tail node, we can create `dummy` node, and point `dummy.next` to `head`. It helps not to handle edge cases for head only:
 
-```py filename="dummy node usage example"
+```py filename="Dummy node usage example"
 dummy = ListNode()
 dummy.next = head
 
@@ -1015,7 +1015,7 @@ Return `true` if there is a cycle in the linked list. Otherwise, return `false`.
 
 ```py
 ┌─────┐    ┌─────┐    ┌─────┐
-│  1  ┼───►│  2  ┼───►│  3  ┼─┐
+│  1  ├───►│  2  ├───►│  3  ├─┐
 └─────┘    └─────┘    └─────┘ │
   ▲                           │
   └───────────────────────────┘
@@ -1063,32 +1063,32 @@ You may not modify the values in the list's nodes. Only nodes themselves may be 
 ```py
 1. Initial list:
 ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
-│  1  ┼───►│  2  ┼───►│  3  ┼───►│  4  ┼───►│  5  ┼───►null
+│  1  ├───►│  2  ├───►│  3  ├───►│  4  ├───►│  5  ├───►null
 └─────┘    └─────┘    └─────┘    └─────┘    └─────┘
 
 2. Find middle (middle points to 3):
 ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
-│  1  ┼───►│  2  ┼───►│  3  ┼───►│  4  ┼───►│  5  ┼───►null
+│  1  ├───►│  2  ├───►│  3  ├───►│  4  ├───►│  5  ├───►null
 └─────┘    └─────┘    └─────┘    └─────┘    └─────┘
                          ▲
                       middle
 
 3. Reverse second half (4->5 becomes 5->4):
 ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
-│  1  ┼───►│  2  ┼───►│  3  ┼───►│  4  ◄────│  5  │
+│  1  ├───►│  2  ├───►│  3  ├───►│  4  ◄────│  5  │
 └─────┘    └─────┘    └─────┘    └─────┘    └─────┘
                                              prev
 
 4. Start merging (first=1, second=5):
 ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
-│  1  ┼─┐  │  2  ┼───►│  3  ┼───►│  4  ◄────│  5  │
+│  1  ├─┐  │  2  ├───►│  3  ├───►│  4  ◄────│  5  │
 └─────┘ │  └─────┘    └─────┘    └─────┘    └─────┘
         │                                       ▲
         └───────────────────────────────────────┘
 
 5. Final reordered list:
 ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
-│  1  ┼───►│  5  ┼───►│  2  ┼───►│  4  ┼───►│  3  ┼───►null
+│  1  ├───►│  5  ├───►│  2  ├───►│  4  ├───►│  3  ├───►null
 └─────┘    └─────┘    └─────┘    └─────┘    └─────┘
 ```
 
@@ -1570,7 +1570,7 @@ The `top k` elements pattern is crucial for efficiently finding a specific numbe
 Maintains a `heap` of size `k` while iterating through the list of elements.
 
 <AlgorithmSummary
-  tc={{ latex: "$$O(n*\\log n)$$" }}
+  tc={{ latex: "$$O(n\\cdot\\log n)$$" }}
   sc={{ latex: "$$O(k)$$" }}
 />
 

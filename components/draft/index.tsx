@@ -7,7 +7,7 @@ export const Draft: FC = () => (
     >
       Draft
     </span>
-    <span className="text-zinc-600">
+    <span className="text-zinc-600 dark:text-zinc-400">
       This section is not fully ready yet.{" "}
       <a href="#get-notified">Get notified</a> when full cheatsheet is ready.
     </span>

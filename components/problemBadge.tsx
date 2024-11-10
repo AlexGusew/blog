@@ -15,7 +15,7 @@ interface ProblemBadgeProps {
 const ProblemBadge: FC<ProblemBadgeProps> = ({ difficulty }) => {
   return (
     <Badge
-      className={`${difficultyColor[difficulty]} font-semibold shadow-none`}
+      className={`${difficultyColor[difficulty]} -translate-y-0.5 mr-1 font-semibold shadow-none`}
     >
       {difficulty}
     </Badge>

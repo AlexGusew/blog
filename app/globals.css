@@ -6,10 +6,6 @@ img {
   border-radius: 16px;
 }
 
-code {
-  @apply bg-gray-400 text-red-500 py-1 px-2 rounded-md font-mono text-sm bg-opacity-30;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -94,4 +90,29 @@ mjx-container > svg {
     white-space: normal !important;
     overflow-wrap: break-word !important;
   }
+}
+
+/* Rehype pretty code multiple themes support */
+code[data-theme*=" "],
+code[data-theme*=" "] span {
+  --shiki-light-bg: rgb(255, 255, 255);
+
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+.dark {
+  code[data-theme*=" "],
+  code[data-theme*=" "] span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
+}
+
+pre > code {
+  @apply py-4 px-2 font-mono text-sm overflow-auto;
+}
+
+:not(pre) > code {
+  @apply bg-zinc-400 py-1 px-2 rounded-md font-mono text-sm bg-opacity-30;
 }
