@@ -21,7 +21,6 @@
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
     "@vercel/analytics": "^1.0.0",
-    "autoprefixer": "10.4.14",
     "better-react-mathjax": "^2.0.3",
     "bufferutil": "^4.0.8",
     "class-variance-authority": "^0.7.0",
@@ -47,5 +46,8 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.0.4",
     "utf-8-validate": "^6.0.5"
+  },
+  "devDependencies": {
+    "autoprefixer": "10.4.14"
   }
 }

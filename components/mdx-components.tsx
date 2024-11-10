@@ -6,6 +6,7 @@ import AlgorithmSummary from "@/components/algorithmSummary";
 import Problem from "@/components/problem";
 import ProblemComplexity from "@/components/problemComplexity";
 import ProblemBadge from "@/components/problemBadge";
+import { Draft } from "@/components/draft";
 
 const components = {
   Image,
@@ -16,6 +17,7 @@ const components = {
   Problem,
   ProblemComplexity,
   ProblemBadge,
+  Draft,
 };
 
 interface MdxProps {

@@ -73,6 +73,10 @@ code {
   body {
     @apply bg-background text-foreground;
   }
+
+  input {
+    @apply autofill:shadow-[inset_0_0_0px_1000px_#eab308];
+  }
 }
 
 details > summary > * {

@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@/components/analytics";
 import { ModeToggle } from "@/components/mode-toggle";
 import MathJaxProvider from "@/components/providers/mathjax";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               </header>
               <main>{children}</main>
             </div>
+            <Toaster />
             <Analytics />
           </ThemeProvider>
         </MathJaxProvider>

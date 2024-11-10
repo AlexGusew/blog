@@ -22,6 +22,7 @@ date: "2024-10-28"
 - [Heap: K-Way Merge](#heap-k-way-merge)
 - [Binary search](#binary-search)
 - [Dynamic Programming](#dynamic-programming)
+- [Bitwise operations](#bitwise-operations)
 
 </details>
 
@@ -79,7 +80,7 @@ To calculate Order of Magnitude:
 
 - **Discard constants**:
 
-  - $ 3n^2 + 2n + 10\log n + 5 \to n^2 + n + \log n $
+  - $ 3n^2 + 2n + 10\log n + 5$ $\to n^2 + n + \log n $
 
 - **Pick only the most significant function**:
   - $ n^2 + n + \log n \to n^2 $
@@ -2311,6 +2312,8 @@ def findPeakElement(self, nums):
 
 ## Dynamic Programming
 
+<Draft />
+
 **Dynamic programming** is a computer programming technique where an algorithmic problem is first broken down into sub-problems, the results are saved, and then the sub-problems are optimized to find the overall solution.
 
 #### When to use
@@ -2361,3 +2364,73 @@ def findPeakElement(self, nums):
 - [Miro board with examples](https://miro.com/app/board/uXjVKsh2Zg4=/)
 
 </details>
+
+## Bitwise operations
+
+<Draft />
+
+#### Operators
+
+- **AND** `&` - Return `1` if left and right are `1`
+- **OR** `|` - Return `1` if left or right are `1`
+- **XOR** `^` - Return `1` if either left or right bit is `1`, but not both
+- **NOT** `~` - Inverts bits: `1 → 0`, `0 → 1`
+  - `~n == -n - 1`.
+    - Example: `~1 == -2`
+  - `arr[~k]` - access <code>k<sub>th</sub></code> element in array from the end:
+
+```py
+arr = [0, 1, 2, 3, 4, 5, 6]
+k = 1
+arr[~k] # 5; returns second element form the end because ~1 == -2
+```
+
+- **Bitwise shift left** `<<`:
+  - Shifts all bits of a number to the left by a specified number of positions.
+  - Any bits that exceed the size of the number (e.g., `32-bit int`) are discarded.
+    - Example: $11_{10} \ll 3 \rightarrow 1011_{2} \ll 3 = 1011\mathbf{000}_{2} = 88_{10}$
+  - $n\ll k = n * 2^k$
+    - Example: $5\ll 3 = 5 * 2^3 = 40$
+      - $5_{10} = 00000101_{2}$
+      - $5 \ll 3 = 00000101_{2} \ll 3 = 00101\mathbf{000}_{2} = 40_{10} \\[5pt]$
+- **Bitwise shift right** `>>`
+  - Shift all bits to right
+  - All bits on right which exceed number size are discarded
+  - $n \gg 1$ - same as integer division by $2$: $n // 2$
+  - $n \gg k$ - same as integer division by $k$: $n // 2^k$
+  - $ \operatorname{\,//\,} $
+  - Example:
+    - $11_{10} = 1011_{2}$
+    - $11_{10} \ll 3 =  1011_{2} \ll 3 = 1011\mathbf{000}_{2}$
+
+#### Comparison of bitwise operations
+
+```py
+      1 0    1 1
+    ┌────────────
+AND │  0      1
+OR  │  1      1
+XOR │  1      0
+```
+
+#### Operations precedence
+
+1. `~`
+2. `>>`, `<<`
+3. `&`
+4. `^`
+5. `|`
+
+**Example**
+
+$m \ll n \; \& \;\sim k\; |\; l \to$ $\overset{4}{\overbrace{\bigg(\overset{3}{\overbrace{\Big(\overset{2}{\overbrace{(m \ll n)}} \; \& \; \overset{1}{\overbrace{(\sim k)}}}\Big)}\; |\; l\bigg)}}$
+
+#### Common operations
+
+- Make bitmask with all `1`'s of length `n` (for `n = 4`, `mask = 0b1111`):
+  - `1 << n - 1`
+  - `~(~0 << n)`
+  - `~- 2 ** n`:
+    1. `2 ** n` - Same with `1 << n`
+    2. `-` - Make negative number.Remember, negatives are stored as Two-s complement `c = ~n + 1`
+    3. `~` - Since complement inverts bits, we revert them back
