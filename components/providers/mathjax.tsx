@@ -1,11 +1,12 @@
 "use client";
 
-import { MathJaxContext } from "better-react-mathjax";
+// import { MathJaxContext } from "better-react-mathjax";
 
 export default function MathJaxProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <MathJaxContext>{children}</MathJaxContext>;
+  return null;
+  // return <MathJaxContext>{children}</MathJaxContext>;
 }

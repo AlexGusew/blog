@@ -80,10 +80,6 @@ details > summary > * {
   transform: translate(10px, 3px);
 }
 
-mjx-container > svg {
-  display: inline-block;
-}
-
 @media (max-width: 640px) {
   mjx-math {
     @apply inline-block;
@@ -115,4 +111,8 @@ pre > code {
 
 :not(pre) > code {
   @apply bg-zinc-400 py-1 px-2 rounded-md font-mono text-sm bg-opacity-30;
+}
+
+.katex-display {
+  overflow: auto hidden;
 }

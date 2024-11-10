@@ -1,6 +1,6 @@
 "use client";
 
-import { MathJax } from "better-react-mathjax";
+// import { MathJax } from "better-react-mathjax";
 import { type FC } from "react";
 
 interface ProblemComplexityProps {
@@ -24,7 +24,7 @@ const ProblemComplexity: FC<ProblemComplexityProps> = ({ tc, sc }) => {
             className="flex justify-between items-baseline"
           >
             <span className="text-sm">{label}</span>
-            <MathJax>{value}</MathJax>
+            {/* <MathJax>{value}</MathJax> */}
           </div>
         ))}
     </section>

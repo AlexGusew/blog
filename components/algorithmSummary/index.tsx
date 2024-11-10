@@ -1,7 +1,6 @@
 "use client";
 
 import Info from "@/components/algorithmSummary/info";
-import { MathJax } from "better-react-mathjax";
 import { type FC, type PropsWithChildren } from "react";
 
 interface ListValue {
@@ -30,7 +29,7 @@ const AlgorithmSummary: FC<AlgorithmSummaryProps> = ({ children, tc, sc }) => {
             className="flex flex-wrap justify-between items-baseline"
           >
             <span className="text-sm">{label}</span>
-            {value?.latex && <MathJax inline>{value.latex}</MathJax>}
+            {/* {value?.latex && <MathJax inline>{value.latex}</MathJax>} */}
             {value?.raw}
           </div>
         ))}

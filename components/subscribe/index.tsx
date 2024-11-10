@@ -68,14 +68,14 @@ export default function SubscribeFeatured() {
               name="email"
               placeholder="Email"
               required
-              className="my-2 bg-white/10 border-white/20 text-white placeholder:text-white/70 dark:border-black/20 dark:text-black dark:placeholder:text-black/70"
+              className="my-3 bg-white/10 border-white/20 text-white placeholder:text-white/70 dark:border-black/20 dark:text-black dark:placeholder:text-black/70"
             />
             <Button
               type="submit"
               variant="outline"
               disabled={isLoading}
               size={"lg"}
-              className="mt-6 w-full bg-white text-black hover:bg-white/90 dark:bg-black dark:text-white dark:hover:bg-black/90 h-14 text-lg"
+              className="mt-6 w-full bg-white text-black hover:bg-white/90 dark:bg-black dark:text-white dark:hover:bg-black/90 h-12 text-md"
             >
               {isLoading ? "Joining..." : "Join the Waitlist"}
             </Button>
