@@ -1,6 +1,7 @@
-"use client";
+// "use client";
 
 import Info from "@/components/algorithmSummary/info";
+import { InlineMath } from "@/components/react-katex";
 import { type FC, type PropsWithChildren } from "react";
 
 interface ListValue {
@@ -29,7 +30,7 @@ const AlgorithmSummary: FC<AlgorithmSummaryProps> = ({ children, tc, sc }) => {
             className="flex flex-wrap justify-between items-baseline"
           >
             <span className="text-sm">{label}</span>
-            {/* {value?.latex && <MathJax inline>{value.latex}</MathJax>} */}
+            {/* {value?.latex && <InlineMath math={value.latex} />} */}
             {value?.raw}
           </div>
         ))}

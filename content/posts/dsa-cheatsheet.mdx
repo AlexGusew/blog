@@ -141,7 +141,9 @@ Optimizing Space complexity can lead to more efficient algorithms, especially in
 
 Iterating two pointers across an array to search for a pair of indices satisfying some condition in linear time.
 
-<AlgorithmSummary tc={{ latex: "$$O(n)$$" }} sc={{ latex: "$$O(1)$$" }} />
+123
+
+<AlgorithmSummary tc={{ latex: "$$O(n123)$$" }} sc={{ latex: "$$O(1)$$" }} />
 
 #### Variants
 
@@ -2089,30 +2091,30 @@ These modifications allow binary search to efficiently tackle a broader range of
 - Sometimes we don't want to check found element in loop
 
 ```py filename="Internal bisect.py module - bisect_left function"
-    while lo < hi:
-        mid = (lo + hi) // 2
-        if a[mid] < x:
-            lo = mid + 1
-        else:
-            hi = mid
-    return lo
+while lo < hi:
+    mid = (lo + hi) // 2
+    if a[mid] < x:
+        lo = mid + 1
+    else:
+        hi = mid
+return lo
 ```
 
 - Beware overflow:
 
 ```py
-  mid = left + (right - left) // 2
-  # vs
-  mid = (right + left) // 2
+mid = left + (right - left) // 2
+# vs
+mid = (right + left) // 2
 ```
 
 - Sometimes we can use built-in b-search like `bisect_left` in Python
 - Infinite loop:
 
 ```py
-  while l <= r:
-    ...
-    l = mid
+while l <= r:
+  ...
+  l = mid
 ```
 
 <details>
