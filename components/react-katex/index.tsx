@@ -1,43 +1,39 @@
-import React, { useMemo } from "react";
+import React, { useMemo, ReactNode } from "react";
 import KaTeX from "katex";
 
-/**
- * @typedef {import("react").ReactNode} ReactNode
- *
- *
- * @callback ErrorRenderer
- * @param {Error} error
- * @returns {ReactNode}
- *
- *
- * @typedef {object} MathComponentPropsWithMath
- * @property {string} math
- * @property {ReactNode=} children
- * @property {string=} errorColor
- * @property {ErrorRenderer=} renderError
- *
- *
- * @typedef {object} MathComponentPropsWithChildren
- * @property {string=} math
- * @property {ReactNode} children
- * @property {string=} errorColor
- * @property {ErrorRenderer=} renderError
- *
- * @typedef {MathComponentPropsWithMath | MathComponentPropsWithChildren} MathComponentProps
- */
+interface MathComponentPropsWithMath {
+  math: string;
+  children?: ReactNode;
+  errorColor?: string;
+  renderError?: (error: Error) => ReactNode;
+}
 
-const createMathComponent = (Component, { displayMode }) => {
-  /**
-   *
-   * @param {MathComponentProps} props
-   * @returns {ReactNode}
-   */
-  const MathComponent = ({ children, errorColor, math, renderError }) => {
+interface MathComponentPropsWithChildren {
+  math?: string;
+  children: ReactNode;
+  errorColor?: string;
+  renderError?: (error: Error) => ReactNode;
+}
+
+type MathComponentProps =
+  | MathComponentPropsWithMath
+  | MathComponentPropsWithChildren;
+
+const createMathComponent = (
+  Component: React.FC<{ html: string }>,
+  { displayMode }: { displayMode: boolean }
+) => {
+  const MathComponent: React.FC<MathComponentProps> = ({
+    children,
+    errorColor,
+    math,
+    renderError,
+  }) => {
     const formula = math ?? children;
 
     const { html, error } = useMemo(() => {
       try {
-        const html = KaTeX.renderToString(formula, {
+        const html = KaTeX.renderToString(formula as string, {
           displayMode,
           errorColor,
           throwOnError: !!renderError,
@@ -46,7 +42,7 @@ const createMathComponent = (Component, { displayMode }) => {
         return { html, error: undefined };
       } catch (error) {
         if (error instanceof KaTeX.ParseError || error instanceof TypeError) {
-          return { error };
+          return { html: "", error };
         }
 
         throw error;
@@ -55,9 +51,9 @@ const createMathComponent = (Component, { displayMode }) => {
 
     if (error) {
       return renderError ? (
-        renderError(error)
+        renderError(error as Error)
       ) : (
-        <Component html={`${error.message}`} />
+        <Component html={`${(error as Error).message}`} />
       );
     }
 
@@ -67,13 +63,13 @@ const createMathComponent = (Component, { displayMode }) => {
   return MathComponent;
 };
 
-const InternalBlockMath = ({ html }) => {
+const InternalBlockMath: React.FC<{ html: string }> = ({ html }) => {
   return (
     <div data-testid="react-katex" dangerouslySetInnerHTML={{ __html: html }} />
   );
 };
 
-const InternalInlineMath = ({ html }) => {
+const InternalInlineMath: React.FC<{ html: string }> = ({ html }) => {
   return (
     <span
       data-testid="react-katex"

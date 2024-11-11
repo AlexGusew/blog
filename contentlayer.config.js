@@ -1,7 +1,5 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
-// import highlight from "rehype-highlight";
 import rehypeMdxCodeProps from "rehype-mdx-code-props";
-// import mathjax from "rehype-mathjax";
 import remarkMath from "remark-math";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypePresetMinify from "rehype-preset-minify";
@@ -67,39 +65,14 @@ const rehypePrettyCodeOptions = {
   bypassInlineCode: true,
 };
 
-const plugins = [
-  rehypePresetMinify.plugins.rehypeMinifyAttributeWhitespace,
-  rehypePresetMinify.plugins.rehypeMinifyCssStyle,
-  rehypePresetMinify.plugins.rehypeRemoveMetaHttpEquiv,
-  rehypePresetMinify.plugins.rehypeMinifyEnumeratedAttribute,
-  rehypePresetMinify.plugins.rehypeMinifyEventHandler,
-  rehypePresetMinify.plugins.rehypeMinifyJavaScriptScript,
-  rehypePresetMinify.plugins.rehypeMinifyJavaScriptUrl,
-  rehypePresetMinify.plugins.rehypeMinifyJsonScript,
-  rehypePresetMinify.plugins.rehypeMinifyLanguage,
-  rehypePresetMinify.plugins.rehypeMinifyMediaAttribute,
-  rehypePresetMinify.plugins.rehypeMinifyMetaColor,
-  rehypePresetMinify.plugins.rehypeMinifyMetaContent,
-  rehypePresetMinify.plugins.rehypeMinifyStyleAttribute,
-  rehypePresetMinify.plugins.rehypeNormalizeAttributeValueCase,
-  rehypePresetMinify.plugins.rehypeRemoveComments,
-  rehypePresetMinify.plugins.rehypeRemoveDuplicateAttributeValues,
-  rehypePresetMinify.plugins.rehypeRemoveEmptyAttribute,
-  rehypePresetMinify.plugins.rehypeRemoveExternalScriptContent,
-  rehypePresetMinify.plugins.rehypeRemoveScriptTypeJavaScript,
-  rehypePresetMinify.plugins.rehypeRemoveStyleTypeCss,
-  rehypePresetMinify.plugins.rehypeSortAttributeValues,
-  rehypePresetMinify.plugins.rehypeSortAttributes,
-];
-
 export default makeSource({
   contentDirPath: "./content",
   mdx: {
     rehypePlugins: [
+      rehypePresetMinify.plugins,
       [rehypePrettyCode, rehypePrettyCodeOptions],
       rehypeMdxCodeProps,
       rehypeKatex,
-      plugins,
     ],
     remarkPlugins: [remarkMath],
   },

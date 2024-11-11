@@ -9,7 +9,7 @@ import ProblemBadge from "@/components/problemBadge";
 import { Draft } from "@/components/draft";
 
 const components = {
-  Image: () => null,
+  Image,
   pre: Code,
   h1: createH("h1"),
   h2: createH("h2"),

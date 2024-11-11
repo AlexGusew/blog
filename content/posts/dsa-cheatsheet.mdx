@@ -141,9 +141,13 @@ Optimizing Space complexity can lead to more efficient algorithms, especially in
 
 Iterating two pointers across an array to search for a pair of indices satisfying some condition in linear time.
 
-123
+<AlgorithmSummary>
 
-<AlgorithmSummary tc={{ latex: "$$O(n123)$$" }} sc={{ latex: "$$O(1)$$" }} />
+$O(n)$
+
+$O(1)$
+
+</AlgorithmSummary>
 
 #### Variants
 
@@ -295,17 +299,14 @@ class Solution:
 
 ## Sliding window
 
-<AlgorithmSummary
-  tc={{ latex: "$$O(n)$$" }}
-  sc={{
-    latex: (
-      <ul>
-        <li>\(O(1) - if\;only\;\)\(2\;pointers\;tracked\)</li>
-        <li>\(O(w) - if\;window\;\)\(elements\;tracked\)</li>
-      </ul>
-    ),
-  }}
-/>
+<AlgorithmSummary>
+
+$O(n)$
+
+- $O(1) - \text{if 2} $ $\text{pointers tracked only}$
+- $O(w) - \text{if window} $ $\text{elements tracked}$
+
+</AlgorithmSummary>
 
 Maintain a **dynamic window** that slides through the array or string, adjusting its boundaries as needed to track relevant elements or characters.
 
@@ -601,7 +602,13 @@ class Solution:
 Performing operations on set of intervals. Typical interval problem deals with **array of overlapping intervals** e.g. `[[1,
 3], [3, 5]]`.
 
-<AlgorithmSummary tc={{ latex: "$$O(n)$$" }} sc={{ latex: "$$O(1)$$" }} />
+<AlgorithmSummary>
+
+$O(n)$
+
+$O(1)$
+
+</AlgorithmSummary>
 
 #### Common tasks with intervals
 
@@ -847,17 +854,14 @@ class Solution:
 
 This section focuses on **in-place** operations with Linked Lists.
 
-<AlgorithmSummary
-  tc={{
-    latex: (
-      <ul>
-        <li>\(Insert, Remove - O(1)\)</li>
-        <li>\(Get\;by\;index, Search - O(n)\)</li>
-      </ul>
-    ),
-  }}
-  sc={{ latex: "$$O(1)$$" }}
-/>
+<AlgorithmSummary>
+
+- $\text{Insert, Remove - O(1)}$
+- $\text{Get by index,} $ $\text{Search - O(n)}$
+
+$O(1)$
+
+</AlgorithmSummary>
 
 #### Properties
 
@@ -1145,18 +1149,15 @@ class Solution:
 
 Heap is a **complete binary tree** where each node is smaller than its children (for min heap). This property is called **Heap invariant**, heap must always comply to it.
 
-<AlgorithmSummary
-  tc={{
-    latex: (
-      <ul>
-        <li>\(Find\;Min / Max - O(1)\)</li>
-        <li>\(Insert, Remove - O(\log n)\)</li>
-        <li>\(Heapify - O(n)\)</li>
-      </ul>
-    ),
-  }}
-  sc={{ latex: "$$O(1)$$" }}
-/>
+<AlgorithmSummary>
+
+- $\text{Find Min / Max - }$ $O(1)$
+- $\text{Insert, Remove - } $ $O(\log n)$
+- $\text{Heapify - O(n)} $
+
+$O(1)$
+
+</AlgorithmSummary>
 
 #### Priority Queue vs Heap
 
@@ -1372,10 +1373,13 @@ Here, $m$ is the size of `nums1` and $n$ is the size of `nums2`:
 
 Two heaps approach used to find out **middle of moving dataset**
 
-<AlgorithmSummary
-  tc={{ latex: "$$O(n\\cdot\\log k)$$" }}
-  sc={{ latex: "$$O(k)$$" }}
-/>
+<AlgorithmSummary>
+
+$O(n\cdot\log k)$
+
+$O(k)$
+
+</AlgorithmSummary>
 
 - <ProblemBadge difficulty="Hard" /> [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/description/)
 - <ProblemBadge difficulty="Hard" /> [480. Sliding Window Median](https://leetcode.com/problems/sliding-window-median/description/)
@@ -1571,10 +1575,13 @@ The `top k` elements pattern is crucial for efficiently finding a specific numbe
 
 Maintains a `heap` of size `k` while iterating through the list of elements.
 
-<AlgorithmSummary
-  tc={{ latex: "$$O(n\\cdot\\log n)$$" }}
-  sc={{ latex: "$$O(k)$$" }}
-/>
+<AlgorithmSummary>
+
+$O(n\cdot\log n)$
+
+$O(k)$
+
+</AlgorithmSummary>
 
 #### Time Complexity
 
@@ -1788,10 +1795,13 @@ class Solution:
 
 The **K-way merge** pattern combines **k** sorted data structures into a single **sorted** output.
 
-<AlgorithmSummary
-  tc={{ latex: "$$O(n\\cdot \\log k)$$" }}
-  sc={{ latex: "$$O(k)$$" }}
-/>
+<AlgorithmSummary>
+
+$O(n\cdot\log k)$
+
+$O(k)$
+
+</AlgorithmSummary>
 
 It works by repeatedly selecting the smallest (or largest) element from among the first elements of each input list and adding it to the output list, continuing until all elements are merged in order.
 
@@ -1989,7 +1999,13 @@ class Solution:
 
 Searching algorithm in sorted array
 
-<AlgorithmSummary tc={{ latex: "$$O(\\log n)$$" }} sc={{ latex: "$$O(1)$$" }} />
+<AlgorithmSummary>
+
+$O(\log n)$
+
+$O(1)$
+
+</AlgorithmSummary>
 
 1. It works by repeatedly **dividing the search interval in half**.
    1. If the target value is **less than** the middle element, the search continues in the left half;
@@ -2436,3 +2452,9 @@ $m \ll n \; \& \;\sim k\; |\; l \to$ $\overset{4}{\overbrace{\bigg(\overset{3}{\
     1. `2 ** n` - Same with `1 << n`
     2. `-` - Make negative number.Remember, negatives are stored as Two-s complement `c = ~n + 1`
     3. `~` - Since complement inverts bits, we revert them back
+- Check if `n` has at least same `1`s as `k`:
+  - `n & k == k`
+- Set `n`-th bit with `1`:
+  - `num = num & 1 << n`
+- Set `n`-th bit with `0`:
+  - `num = num & ~(1 << n)`
