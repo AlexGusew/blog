@@ -1,8 +1,9 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
-import highlight from "rehype-highlight";
 import rehypeMdxCodeProps from "rehype-mdx-code-props";
-import mathjax from "rehype-mathjax";
 import remarkMath from "remark-math";
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypePresetMinify from "rehype-preset-minify";
+import rehypeKatex from "rehype-katex";
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
@@ -55,10 +56,24 @@ export const Post = defineDocumentType(() => ({
   computedFields,
 }));
 
+/** @type {import("rehype-pretty-code").Options} */
+const rehypePrettyCodeOptions = {
+  theme: {
+    light: "one-light",
+    dark: "one-dark-pro",
+  },
+  bypassInlineCode: true,
+};
+
 export default makeSource({
   contentDirPath: "./content",
   mdx: {
-    rehypePlugins: [highlight, rehypeMdxCodeProps, mathjax],
+    rehypePlugins: [
+      rehypePresetMinify.plugins,
+      [rehypePrettyCode, rehypePrettyCodeOptions],
+      rehypeMdxCodeProps,
+      rehypeKatex,
+    ],
     remarkPlugins: [remarkMath],
   },
   documentTypes: [Post, Page],

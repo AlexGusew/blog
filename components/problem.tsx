@@ -38,7 +38,7 @@ export default function Problem({
         {example && (
           <div>
             <p className="font-semibold mb-2">Example:</p>
-            <div className="bg-gray-400 bg-opacity-10 p-4 rounded-md">
+            <div className="dark:bg-[#282c34] p-4 rounded-xl">
               <div>
                 <span className="font-semibold">Input:</span> {example.input}
               </div>

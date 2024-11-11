@@ -16,7 +16,7 @@ export async function POST(request: Request) {
   try {
     const supabase = await createClient();
 
-    await supabase.from("users").insert({ name, email });
+    await supabase.from(process.env.USERS_TABLE).insert({ name, email });
 
     return NextResponse.json(
       { message: "Subscription successful", name },
