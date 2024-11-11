@@ -1,17 +1,11 @@
-"use client";
+import React, { type FC, type PropsWithChildren } from "react";
 
-// import { MathJax } from "better-react-mathjax";
-import { type FC } from "react";
+const ProblemComplexity: FC<PropsWithChildren> = ({ children }) => {
+  const [timeComplexity, spaceComplexity] = React.Children.toArray(children);
 
-interface ProblemComplexityProps {
-  tc?: string;
-  sc?: string;
-}
-
-const ProblemComplexity: FC<ProblemComplexityProps> = ({ tc, sc }) => {
   const renderData = [
-    ["Time Complexity", tc],
-    ["Space Complexity", sc],
+    ["Time Complexity", timeComplexity],
+    ["Space Complexity", spaceComplexity],
   ] as const;
 
   return (
@@ -20,11 +14,11 @@ const ProblemComplexity: FC<ProblemComplexityProps> = ({ tc, sc }) => {
         .filter((i) => i[1])
         .map(([label, value]) => (
           <div
-            key={label + value}
-            className="flex justify-between items-baseline"
+            key={label}
+            className="flex gap-x-2 justify-between items-baseline "
           >
-            <span className="text-sm">{label}</span>
-            {/* <MathJax>{value}</MathJax> */}
+            <div className="text-sm h-4">{label}</div>
+            <div className="h-4">{value}</div>
           </div>
         ))}
     </section>

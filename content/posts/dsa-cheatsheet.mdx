@@ -212,7 +212,13 @@ class Solution:
         return [-1, -1]
 ```
 
-<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+<ProblemComplexity>
+
+$O(n)$
+
+$O(1)$
+
+</ProblemComplexity>
 
 ---
 
@@ -238,7 +244,13 @@ class Solution:
         return slow
 ```
 
-<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+<ProblemComplexity>
+
+$O(n)$
+
+$O(1)$
+
+</ProblemComplexity>
 
 ---
 
@@ -277,7 +289,13 @@ class Solution:
         return ans
 ```
 
-<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+<ProblemComplexity>
+
+$O(n)$
+
+$O(1)$
+
+</ProblemComplexity>
 
 </details>
 
@@ -438,7 +456,13 @@ class Solution:
         return max_picked
 ```
 
-<ProblemComplexity tc="\(O(n^2)\)" sc="\(O(1)\)" />
+<ProblemComplexity>
+
+$O(n^2)$
+
+$O(1)$
+
+</ProblemComplexity>
 
 In second approach, **two nested loops converted into a single loop** thus improving **Time Complexity** from $O(n^2)$ to $O(n)$:
 
@@ -462,7 +486,13 @@ class Solution:
         return max_picked
 ```
 
-<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+<ProblemComplexity>
+
+$O(n)$
+
+$O(1)$
+
+</ProblemComplexity>
 
 ---
 
@@ -505,7 +535,13 @@ class Solution:
         return res
 ```
 
-<ProblemComplexity tc="\(O(n)\)" sc="\(O(n)\)" />
+<ProblemComplexity>
+
+$O(n)$
+
+$O(n)$
+
+</ProblemComplexity>
 
 ---
 
@@ -544,7 +580,13 @@ class Solution:
         return res if res != float('inf') else 0
 ```
 
-<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+<ProblemComplexity>
+
+$O(n)$
+
+$O(1)$
+
+</ProblemComplexity>
 
 ---
 
@@ -580,7 +622,13 @@ class Solution:
         return answer
 ```
 
-<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+<ProblemComplexity>
+
+$O(n)$
+
+$O(1)$
+
+</ProblemComplexity>
 
 </details>
 
@@ -687,10 +735,13 @@ class Solution:
         return merged
 ```
 
-<ProblemComplexity
-  tc="\(O(n\cdot\log n)\)"
-  sc="\(O(n)\) or \(O(\log n)\) depending on sorting algorithm"
-/>
+<ProblemComplexity>
+
+$O(n\cdot\log n)$
+
+$O(n)$ or $O(\log n)$ depending on sorting algorithm
+
+</ProblemComplexity>
 
 ---
 
@@ -758,7 +809,13 @@ class Solution:
         return res
 ```
 
-<ProblemComplexity tc="\(O(n)\)" sc="\(O(n)\)" />
+<ProblemComplexity>
+
+$O(n)$
+
+$O(n)$
+
+</ProblemComplexity>
 
 ---
 
@@ -803,10 +860,13 @@ class Solution:
         return res
 ```
 
-<ProblemComplexity
-  tc="\(O(n\cdot\log 26) \rightarrow O(n)\)"
-  sc="\(O(26) \rightarrow O(1)\)"
-/>
+<ProblemComplexity>
+
+$O(n\cdot\log 26)$ $ \rightarrow O(n)$
+
+$O(26) \rightarrow O(1)$
+
+</ProblemComplexity>
 
 ---
 
@@ -834,7 +894,13 @@ class Solution:
         return len(end_times)
 ```
 
-<ProblemComplexity tc="\(O(n\cdot\log n)\)" sc="\(O(n)\)" />
+<ProblemComplexity>
+
+$O(n\cdot\log n))$
+
+$O(n)$
+
+</ProblemComplexity>
 
 </details>
 
@@ -987,7 +1053,13 @@ class Solution:
         return prev
 ```
 
-<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+<ProblemComplexity>
+
+$O(n)$
+
+$O(1)$
+
+</ProblemComplexity>
 
 **Recursive approach**
 
@@ -1005,7 +1077,13 @@ class Solution:
         return p
 ```
 
-<ProblemComplexity tc="\(O(n)\)" sc="\(O(n)\)" />
+<ProblemComplexity>
+
+$O(n)$
+
+$O(n)$
+
+</ProblemComplexity>
 
 ---
 
@@ -1044,7 +1122,13 @@ class Solution:
         return True
 ```
 
-<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+<ProblemComplexity>
+
+$O(n)$
+
+$O(1)$
+
+</ProblemComplexity>
 
 ---
 
@@ -1072,27 +1156,27 @@ You may not modify the values in the list's nodes. Only nodes themselves may be 
 │  1  ├───►│  2  ├───►│  3  ├───►│  4  ├───►│  5  ├───►null
 └─────┘    └─────┘    └─────┘    └─────┘    └─────┘
 
-2. Find middle (middle points to 3):
+1. Find middle (middle points to 3):
 ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
 │  1  ├───►│  2  ├───►│  3  ├───►│  4  ├───►│  5  ├───►null
 └─────┘    └─────┘    └─────┘    └─────┘    └─────┘
                          ▲
                       middle
 
-3. Reverse second half (4->5 becomes 5->4):
+1. Reverse second half (4->5 becomes 5->4):
 ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
 │  1  ├───►│  2  ├───►│  3  ├───►│  4  ◄────│  5  │
 └─────┘    └─────┘    └─────┘    └─────┘    └─────┘
                                              prev
 
-4. Start merging (first=1, second=5):
+1. Start merging (first=1, second=5):
 ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
 │  1  ├─┐  │  2  ├───►│  3  ├───►│  4  ◄────│  5  │
 └─────┘ │  └─────┘    └─────┘    └─────┘    └─────┘
         │                                       ▲
         └───────────────────────────────────────┘
 
-5. Final reordered list:
+1. Final reordered list:
 ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
 │  1  ├───►│  5  ├───►│  2  ├───►│  4  ├───►│  3  ├───►null
 └─────┘    └─────┘    └─────┘    └─────┘    └─────┘
@@ -1128,7 +1212,13 @@ class Solution:
             second.next, second = first, second.next
 ```
 
-<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+<ProblemComplexity>
+
+$O(n)$
+
+$O(1)$
+
+</ProblemComplexity>
 
 </details>
 
@@ -1288,7 +1378,13 @@ class Solution:
         return heap[0]
 ```
 
-<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(k)\)" />
+<ProblemComplexity>
+
+$O(n\cdot\log k)$
+
+$O(k)$
+
+</ProblemComplexity>
 
 ---
 
@@ -1327,10 +1423,13 @@ class Solution:
 
 Here, $m$ is the size of `nums1` and $n$ is the size of `nums2`:
 
-<ProblemComplexity
-  tc="\(O(min(k*log(k),m*n*log(m*n)))\)"
-  sc="\(O(min(k,m*n))\)"
-/>
+<ProblemComplexity>
+
+$O(min(k\cdot\log k , m\cdot n\cdot \log(m\cdot n)))$
+
+$O(min(k,m\cdot n))$
+
+</ProblemComplexity>
 
 </details>
 
@@ -1464,7 +1563,13 @@ class Solution:
         return w
 ```
 
-<ProblemComplexity tc="\(O(n*\log n)\)" sc="\(O(n)\)" />
+<ProblemComplexity>
+
+$O(n\cdot\log n)$
+
+$O(n)$
+
+</ProblemComplexity>
 
 ---
 
@@ -1539,7 +1644,13 @@ class Solution:
         return res
 ```
 
-<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(k)\)" />
+<ProblemComplexity>
+
+$O(n\cdot \log k)$
+
+$O(k)$
+
+</ProblemComplexity>
 
 </details>
 
@@ -1678,7 +1789,13 @@ class Solution:
         return [num for freq, num in heap]
 ```
 
-<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(n + k)\)" />
+<ProblemComplexity>
+
+$O(n\cdot \log k)$
+
+$O(n + k)$
+
+</ProblemComplexity>
 
 ---
 
@@ -1722,7 +1839,13 @@ class Solution:
         return ''.join(ans)
 ```
 
-<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(k)\)" />
+<ProblemComplexity>
+
+$O(n\cdot \log k)$
+
+$O(k)$
+
+</ProblemComplexity>
 
 ---
 
@@ -1772,7 +1895,13 @@ class Solution:
         return res
 ```
 
-<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(k)\)" />
+<ProblemComplexity>
+
+$O(n\cdot \log k)$
+
+$O(k)$
+
+</ProblemComplexity>
 
 </details>
 
@@ -1877,7 +2006,13 @@ class Solution:
         return val
 ```
 
-<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(k)\)" />
+<ProblemComplexity>
+
+$O(n\cdot\log k)$
+
+$O(k)$
+
+</ProblemComplexity>
 
 ---
 
@@ -1916,7 +2051,13 @@ class Solution:
         return res
 ```
 
-<ProblemComplexity tc="\(O(k*log(k))\)" sc="\(O(k)\)" />
+<ProblemComplexity>
+
+$O(k\cdot\log k)$
+
+$O(k)$
+
+</ProblemComplexity>
 
 ---
 
@@ -1962,7 +2103,13 @@ class Solution:
         return head.next
 ```
 
-<ProblemComplexity tc="\(O(n*log(k))\)" sc="\(O(k)\)" />
+<ProblemComplexity>
+
+$O(n\cdot\log k)$
+
+$O(k)$
+
+</ProblemComplexity>
 
 </details>
 
@@ -2186,7 +2333,13 @@ class Solution:
         return x * pow(x, n - 1)
 ```
 
-<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+<ProblemComplexity>
+
+$O(n)$
+
+$O(1)$
+
+</ProblemComplexity>
 
 Binary search - Recursive
 
@@ -2202,7 +2355,13 @@ class Solution:
         return self.myPow(x * x, n / 2)
 ```
 
-<ProblemComplexity tc="\(O(\log n)\)" sc="\(O(\log n)\)" />
+<ProblemComplexity>
+
+$O(\log n)$
+
+$O(\log n)$
+
+</ProblemComplexity>
 
 Binary search - Iterative
 
@@ -2226,7 +2385,13 @@ class Solution:
         return result
 ```
 
-<ProblemComplexity tc="\(O(\log n)\)" sc="\(O(1)\)" />
+<ProblemComplexity>
+
+$O(\log n)$
+
+$O(1)$
+
+</ProblemComplexity>
 
 ---
 
@@ -2282,7 +2447,13 @@ def findPeakElement(nums):
     return len(nums) - 1
 ```
 
-<ProblemComplexity tc="\(O(n)\)" sc="\(O(1)\)" />
+<ProblemComplexity>
+
+$O(n)$
+
+$O(1)$
+
+</ProblemComplexity>
 
 **Binary search - Iterative**
 
@@ -2310,7 +2481,13 @@ def findPeakElement(self, nums):
     return l
 ```
 
-<ProblemComplexity tc="\(O(\log n)\)" sc="\(O(1)\)" />
+<ProblemComplexity>
+
+$O(\log n)$
+
+$O(1)$
+
+</ProblemComplexity>
 
 </details>
 

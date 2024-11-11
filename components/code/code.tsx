@@ -2,6 +2,8 @@ import type { FC, PropsWithChildren } from "react";
 
 export interface CodeProps extends PropsWithChildren {
   filename?: string;
+  dataLanguage?: string;
+  dataTheme?: string;
 }
 
 const Code: FC<CodeProps> = ({

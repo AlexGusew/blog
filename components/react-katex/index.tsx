@@ -23,12 +23,12 @@ const createMathComponent = (
   Component: React.FC<{ html: string }>,
   { displayMode }: { displayMode: boolean }
 ) => {
-  const MathComponent: React.FC<MathComponentProps> = ({
+  const MathComponent = ({
     children,
     errorColor,
     math,
     renderError,
-  }) => {
+  }: MathComponentProps) => {
     const formula = math ?? children;
 
     const { html, error } = useMemo(() => {
