@@ -11,7 +11,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Alex Codders",
+  title: "Alex Coders",
   description: "Personal blog",
 };
 
