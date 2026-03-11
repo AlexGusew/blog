@@ -75,7 +75,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             defer
             src="https://cloud.umami.is/script.js"
             data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
-            data-domains="alexcoders.com"
+            data-domains="alexcoders.com,www.alexcoders.com"
             strategy="afterInteractive"
           />
         </ThemeProvider>
