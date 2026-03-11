@@ -66,7 +66,7 @@ export default async function PostPage({ params }: PostProps) {
   return (
     <article className="py-6 prose dark:prose-invert">
       <NewAppAlert />
-      <h1 className="mb-2">{post.title}</h1>
+      <h1 className="mb-2 mt-12">{post.title}</h1>
       <div className="flex flex-row justify-between my-8">
         {Boolean(post.difficulty) && (
           <Difficulty value={post.difficulty as 1 | 2 | 3} />
