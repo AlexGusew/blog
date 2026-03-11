@@ -1,5 +1,6 @@
 import { allPosts } from "contentlayer/generated";
 import Link from "next/link";
+import { NewAppAlert } from "@/components/newAppAlert";
 
 export default function Home() {
   const posts = allPosts.sort(
@@ -8,6 +9,7 @@ export default function Home() {
 
   return (
     <div className="py-6 prose dark:prose-invert">
+      <NewAppAlert />
       <h1>Posts</h1>
       {posts.map((post) => (
         <article key={post._id}>

@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@/components/analytics";
 import { Header } from "@/components/header";
-import { NewAppAlert } from "@/components/newAppAlert";
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,7 +25,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="max-w-2xl mx-auto pt-10 px-4 min-h-screen flex flex-col">
             <Header />
-            <NewAppAlert />
             <main className="mt-14 flex-1">{children}</main>
             <footer className="mt-16 text-center text-sm text-zinc-400 dark:text-zinc-500">
               <hr className="border-zinc-200 dark:border-zinc-700 -mx-[calc((100vw-100%)/2)]" />

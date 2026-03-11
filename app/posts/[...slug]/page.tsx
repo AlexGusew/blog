@@ -7,6 +7,7 @@ import { Metadata } from "next";
 import { Mdx } from "@/components/mdx-components";
 import { Difficulty } from "@/components/ui/difficulty";
 import { Toaster } from "@/components/ui/toaster";
+import { NewAppAlert } from "@/components/newAppAlert";
 
 const SubscribeFeatured = dynamic(() => import("@/components/subscribe"), {
   ssr: false,
@@ -67,6 +68,7 @@ export default async function PostPage({ params }: PostProps) {
 
   return (
     <article className="py-6 prose dark:prose-invert">
+      <NewAppAlert />
       <h1 className="mb-2">{post.title}</h1>
       <div className="flex flex-row justify-between my-8">
         {Boolean(post.difficulty) && (
