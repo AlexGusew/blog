@@ -1,10 +1,18 @@
+import "katex/dist/katex.min.css";
 import { notFound } from "next/navigation";
 import { allPosts } from "contentlayer/generated";
+import dynamic from "next/dynamic";
 
 import { Metadata } from "next";
 import { Mdx } from "@/components/mdx-components";
 import { Difficulty } from "@/components/ui/difficulty";
-import SubscribeFeatured from "@/components/subscribe";
+import { Toaster } from "@/components/ui/toaster";
+
+const SubscribeFeatured = dynamic(() => import("@/components/subscribe"), {
+  ssr: false,
+});
+
+export const dynamicParams = false;
 
 interface PostProps {
   params: {
@@ -17,7 +25,7 @@ async function getPostFromParams(params: PostProps["params"]) {
   const post = allPosts.find((post) => post.slugAsParams === slug);
 
   if (!post) {
-    null;
+    return null;
   }
 
   return post;
@@ -73,6 +81,7 @@ export default async function PostPage({ params }: PostProps) {
       )}
       <Mdx code={post.body.code} />
       <SubscribeFeatured />
+      <Toaster />
     </article>
   );
 }

@@ -7,7 +7,7 @@ const CloseIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
-    className="size-6 text-gray-500 size-4"
+    className="w-3 h-3 text-gray-500"
   >
     <path
       fillRule="evenodd"
@@ -34,21 +34,20 @@ export const NewAppAlert = () => {
   if (!isVisible) return null;
 
   return (
-    <section className="relative mt-14 mb-4 p-4 border border-gray-300 dark:border-zinc-700 rounded-lg">
-      <button onClick={onClose} className="absolute top-2 right-2 w-6 p-1 dark:hover:bg-gray-700/40 hover:bg-gray-200/40 rounded-lg">
+    <section className="relative mt-14 mb-4 px-8 py-7 border border-zinc-200 dark:border-zinc-700/60 rounded-2xl bg-zinc-50/50 dark:bg-zinc-800/30">
+      <button onClick={onClose} className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center hover:bg-zinc-200/60 dark:hover:bg-zinc-700/40 rounded-full transition-colors">
         <CloseIcon />
       </button>
-      <h2 className="text-lg font-semibold mb-2">🚀 Introducing TC Getter!</h2>
-      <p>
-        Check out{" "}
+      <h2 className="text-lg font-semibold mb-1">Introducing TC Getter</h2>
+      <p className="text-sm text-zinc-600 dark:text-zinc-400">
+        Calculate Big-O time complexity of Python code in the browser.{" "}
         <a
           href="https://tcgetter.alexcoders.com"
           target="_blank"
           className="underline text-blue-600 dark:text-blue-400"
         >
-          TC Getter
-        </a>{" "}
-        - calculate Big-O time complexity of your Python code right in the browser.
+          Try it out
+        </a>
       </p>
     </section>
   );

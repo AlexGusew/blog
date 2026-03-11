@@ -69,10 +69,10 @@ export default makeSource({
   contentDirPath: "./content",
   mdx: {
     rehypePlugins: [
-      rehypePresetMinify.plugins,
+      rehypeKatex,
       [rehypePrettyCode, rehypePrettyCodeOptions],
       rehypeMdxCodeProps,
-      rehypeKatex,
+      ...rehypePresetMinify.plugins,
     ],
     remarkPlugins: [remarkMath],
   },
