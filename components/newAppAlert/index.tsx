@@ -22,12 +22,12 @@ export const NewAppAlert = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setIsVisible(localStorage.getItem("lctodoAlertVisible") !== "true");
+      setIsVisible(localStorage.getItem("tcgetterAlertVisible") !== "true");
     }
   }, []);
 
   const onClose = () => {
-    localStorage.setItem("lctodoAlertVisible", "true");
+    localStorage.setItem("tcgetterAlertVisible", "true");
     setIsVisible(false);
   };
 
@@ -38,17 +38,17 @@ export const NewAppAlert = () => {
       <button onClick={onClose} className="absolute top-2 right-2 w-6 p-1 dark:hover:bg-gray-700/40 hover:bg-gray-200/40 rounded-lg">
         <CloseIcon />
       </button>
-      <h2 className="text-lg font-semibold mb-2">🚀 New App Alert!</h2>
+      <h2 className="text-lg font-semibold mb-2">🚀 Introducing TC Getter!</h2>
       <p>
         Check out{" "}
         <a
-          href="https://lctodo.alexcoders.com"
+          href="https://tcgetter.alexcoders.com"
           target="_blank"
           className="underline text-blue-600 dark:text-blue-400"
         >
-          LC Todo
+          TC Getter
         </a>{" "}
-        - my new app for tracking LeetCode problems.
+        - calculate Big-O time complexity of your Python code right in the browser.
       </p>
     </section>
   );
