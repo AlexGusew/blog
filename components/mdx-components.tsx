@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import { useMDXComponent } from "next-contentlayer/hooks";
+import { useMDXComponent } from "next-contentlayer2/hooks";
 import Code from "@/components/code/code";
 import createH from "@/components/headings";
 import AlgorithmSummary from "@/components/algorithmSummary";
@@ -24,8 +26,10 @@ interface MdxProps {
   code: string;
 }
 
+/* eslint-disable react-hooks/static-components -- contentlayer2 hook pattern */
 export function Mdx({ code }: MdxProps) {
   const Component = useMDXComponent(code);
 
   return <Component components={components} />;
 }
+/* eslint-enable react-hooks/static-components */

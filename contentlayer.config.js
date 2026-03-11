@@ -1,11 +1,11 @@
-import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import { defineDocumentType, makeSource } from "contentlayer2/source-files";
 import rehypeMdxCodeProps from "rehype-mdx-code-props";
 import remarkMath from "remark-math";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypePresetMinify from "rehype-preset-minify";
 import rehypeKatex from "rehype-katex";
 
-/** @type {import('contentlayer/source-files').ComputedFields} */
+/** @type {import('contentlayer2/source-files').ComputedFields} */
 const computedFields = {
   slug: {
     type: "string",

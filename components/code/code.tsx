@@ -9,8 +9,8 @@ export interface CodeProps extends PropsWithChildren {
 const Code: FC<CodeProps> = ({
   children,
   filename,
-  dataLanguage: _,
-  dataTheme: __,
+  dataLanguage: _dataLanguage,
+  dataTheme: _dataTheme,
   ...rest
 }) => {
   return (

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@/components/analytics";
 import { Header } from "@/components/header";
+import Link from "next/link";
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -29,7 +30,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <footer className="mt-16 text-center text-sm text-zinc-400 dark:text-zinc-500">
               <hr className="border-zinc-200 dark:border-zinc-700 -mx-[calc((100vw-100%)/2)]" />
               <div className="py-6 flex items-center justify-center gap-4">
-                <a href="/" className="hover:underline">alexcoders.com</a>
+                <Link href="/" className="hover:underline">alexcoders.com</Link>
                 <span>&middot;</span>
                 <span>Let&apos;s connect</span>
                 <a

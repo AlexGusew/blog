@@ -1,4 +1,4 @@
-const { withContentlayer } = require("next-contentlayer");
+const { withContentlayer } = require("next-contentlayer2");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -6,6 +6,7 @@ const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  turbopack: {},
 };
 
 module.exports = withContentlayer(nextConfig);

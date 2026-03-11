@@ -1,11 +1,11 @@
 import Info from "@/components/algorithmSummary/info";
-import React, { FC, PropsWithChildren, ReactNode } from "react";
+import React, { FC, PropsWithChildren } from "react";
 
 const AlgorithmSummary: FC<PropsWithChildren> = ({ children }) => {
   const [timeComplexity, spaceComplexity] = React.Children.toArray(children);
 
   return (
-    <section className="border-zinc-400 border-opacity-40 border-2 px-8 py-8 rounded-lg flex flex-col relative">
+    <section className="border-zinc-400/40 border-2 px-8 py-8 rounded-lg flex flex-col relative">
       <div className="flex justify-between items-center">
         <span className="text-sm text-left">Time Complexity</span>
         <span>{timeComplexity}</span>
